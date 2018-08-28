@@ -28,7 +28,7 @@
     group: "{{ item.group | default(omit) }}"
     groups: "{{ item.groups | default(omit) }}"
   with_items:
-   - "{{ users_user_list }}"
+    - "{{ users_user_list }}"
 
 - name: manage cron permission
   template:
