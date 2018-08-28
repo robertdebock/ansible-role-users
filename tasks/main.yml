@@ -26,20 +26,9 @@
     comment: "{{ item.comment | default(omit) }}"
     uid: "{{ item.uid | default(omit) }}"
     group: "{{ item.group | default(omit) }}"
-    groups: "{{ item.groups | default(omit) }}"
+    groups: "{{ item.groups | default(omit) }}{% if item.administrator is defined %}{% if item.administrator %},{{ users_administrator_group }}{% endif %}{% endif %}"
   with_items:
     - "{{ users_user_list }}"
-
-- name: manage administrator permissions
-  user:
-    name: "{{ item.name }}"
-    groups: "{{ users_administrator_group }}"
-    append: yes
-  with_items:
-    "{{ users_user_list }}"
-  when:
-    - item.administrator is defined
-    - item.administrator
 
 - name: manage cron permission
   template:
