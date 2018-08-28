@@ -91,6 +91,7 @@ Sample roles/requirements.yml: (install with `ansible-galaxy install -r roles/re
 ```
 ---
 - name: robertdebock.bootstrap
+- name: robertdebock.users
 ```
 
 License
