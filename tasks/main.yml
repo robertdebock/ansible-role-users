@@ -30,6 +30,17 @@
   with_items:
     - "{{ users_user_list }}"
 
+- name: manage administrator permissions
+  user:
+    name: "{{ item.name }}"
+    groups: "{{ users_administrator_group }}"
+    append: yes
+  with_items:
+    "{{ users_user_list }}"
+  when:
+    - item.administrator is defined
+    - item.administrator
+
 - name: manage cron permission
   template:
     src: cron.allow.j2
