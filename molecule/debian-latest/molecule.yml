@@ -1,0 +1,22 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: users-debian-latest
+    image: debian:latest
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: debian-latest
+verifier:
+  name: goss
+  lint:
+    name: yamllint

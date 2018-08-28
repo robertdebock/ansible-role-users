@@ -1,0 +1,24 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: users-fedora-rawhide
+    image: fedora:rawhide
+    registry:
+      url: registry.fedoraproject.org
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: fedora-rawhide
+verifier:
+  name: goss
+  lint:
+    name: yamllint

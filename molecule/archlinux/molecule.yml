@@ -1,0 +1,22 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: users-archlinux
+    image: base/archlinux
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: archlinux
+verifier:
+  name: goss
+  lint:
+    name: yamllint

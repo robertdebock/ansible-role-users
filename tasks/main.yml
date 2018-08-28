@@ -1,0 +1,54 @@
+---
+# tasks file for users
+- name: load default variables
+  include_vars:
+    file: default.yml
+
+- name: load os-specific variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+    - "{{ ansible_distribution }}.yml"
+    - default.yml
+
+- name: manage groups
+  group:
+    name: "{{ item.name }}"
+    gid: "{{ item.gid | default(omit) }}"
+    state: "{{ item.state | default('present') }}"
+  with_items:
+    - "{{ users_group_list }}"
+
+- name: manage users
+  user:
+    name: "{{ item.name }}"
+    state: "{{ item.state | default('present') }}"
+    comment: "{{ item.comment | default(omit) }}"
+    uid: "{{ item.uid | default(omit) }}"
+    group: "{{ item.group | default(omit) }}"
+    groups: "{{ item.groups | default(omit) }}"
+  with_items:
+   - "{{ users_user_list }}"
+
+- name: manage cron permission
+  template:
+    src: cron.allow.j2
+    dest: /etc/cron.allow
+
+- name: set sudo options
+  template:
+    src: sudo.j2
+    dest: /etc/sudoers.d/{{ item.name }}
+  with_items:
+    - "{{ users_user_list }}"
+  when:
+    item.sudo_options is defined
+
+- name: set authorized_key
+  authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ item.authorized_key }}"
+  with_items:
+    - "{{ users_user_list }}"
+  when:
+    - item.authorized_key is defined
