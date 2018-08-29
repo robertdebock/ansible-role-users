@@ -19,7 +19,7 @@
   with_items:
     - "{{ users_group_list }}"
   when:
-    - users_user_list is defined
+    - users_group_list is defined
 
 - name: manage users
   user:
