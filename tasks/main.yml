@@ -18,6 +18,8 @@
     state: "{{ item.state | default('present') }}"
   with_items:
     - "{{ users_group_list }}"
+  when:
+    - users_user_list is defined
 
 - name: manage users
   user:
@@ -29,6 +31,8 @@
     groups: "{{ item.groups | default(omit) }}{% if item.administrator is defined %}{% if item.administrator %},{{ users_administrator_group }}{% endif %}{% endif %}"
   with_items:
     - "{{ users_user_list }}"
+  when:
+    - users_user_list is defined
 
 - name: manage cron permission
   template:
