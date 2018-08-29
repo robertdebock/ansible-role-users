@@ -38,6 +38,8 @@
   template:
     src: cron.allow.j2
     dest: /etc/cron.allow
+  when:
+    - users_user_list is defined
 
 - name: set sudo options
   template:
@@ -46,7 +48,8 @@
   with_items:
     - "{{ users_user_list }}"
   when:
-    item.sudo_options is defined
+    - users_user_list is defined
+    - item.sudo_options is defined
 
 - name: set authorized_key
   authorized_key:
@@ -55,4 +58,5 @@
   with_items:
     - "{{ users_user_list }}"
   when:
+    - users_user_list is defined
     - item.authorized_key is defined
