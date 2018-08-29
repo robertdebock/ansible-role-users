@@ -28,7 +28,7 @@
     comment: "{{ item.comment | default(omit) }}"
     uid: "{{ item.uid | default(omit) }}"
     group: "{{ item.group | default(omit) }}"
-    groups: "{{ item.groups | default(omit) }}{% if item.administrator is defined %}{% if item.administrator %},{{ users_administrator_group }}{% endif %}{% endif %}"
+    groups: "{{ item.groups | default(omit) }}"
   with_items:
     - "{{ users_user_list }}"
   when:
