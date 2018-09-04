@@ -26,6 +26,7 @@
     name: "{{ item.name }}"
     state: "{{ item.state | default('present') }}"
     comment: "{{ item.comment | default(omit) }}"
+    password: "{{ item.password | default(omit) }}"
     uid: "{{ item.uid | default(omit) }}"
     group: "{{ item.group | default(omit) }}"
     groups: "{{ item.groups | default(omit) }}"
