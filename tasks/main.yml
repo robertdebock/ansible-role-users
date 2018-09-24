@@ -14,8 +14,8 @@
 - name: manage groups
   group:
     name: "{{ item.name }}"
-    gid: "{{ item.gid | default(omit) }}"
     state: "{{ item.state | default('present') }}"
+    gid: "{{ item.gid | default(omit) }}"
   with_items:
     - "{{ users_group_list }}"
   when:
@@ -55,6 +55,7 @@
 - name: set authorized_key
   authorized_key:
     user: "{{ item.name }}"
+    state: present
     key: "{{ item.authorized_key }}"
   with_items:
     - "{{ users_user_list }}"
