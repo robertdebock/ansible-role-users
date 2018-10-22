@@ -7,7 +7,3 @@
   roles:
     - role: robertdebock.bootstrap
     - role: ansible-role-users
-
-  tasks:
-    - name: test connection
-      ping:
