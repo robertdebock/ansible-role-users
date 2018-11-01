@@ -5,5 +5,5 @@
   become: true
 
   roles:
-    - role: robertdebock.bootstrap
-    - role: ansible-role-users
+    - robertdebock.bootstrap
+    - ansible-role-users

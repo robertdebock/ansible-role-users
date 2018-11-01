@@ -4,12 +4,14 @@
 # The location to store ssh keys for user
 users_ssh_key_directory: ssh_keys
 
+# A list of groups and properties.
 # users_group_list:
 #   - name: robertdb
 #     gid: 1024
 #   - name: notgroup
 #     state: absent
-#
+
+# A list of users and properties.
 # users_user_list:
 #   - name: root
 #     cron_allow: yes
