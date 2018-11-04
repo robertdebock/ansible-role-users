@@ -40,7 +40,7 @@
 - name: set sudo options
   template:
     src: sudo.j2
-    dest: /etc/sudoers.d/{{ item.name }}
+    dest: "/etc/sudoers.d/{{ item.name }}"
   with_items:
     - "{{ users_user_list }}"
   when:
