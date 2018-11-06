@@ -1,1 +1,0 @@
-Create and manage users, groups and ssh-keys. Easy to include on all machines you want to login to.

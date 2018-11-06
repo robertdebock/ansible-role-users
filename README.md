@@ -3,8 +3,7 @@ users
 
 [![Build Status](https://travis-ci.org/robertdebock/ansible-role-users.svg?branch=master)](https://travis-ci.org/robertdebock/ansible-role-users)
 
-Create and manage users, groups and ssh-keys. Easy to include on all machines you want to login to.
-
+The purpose of this role is to add users and groups on your system.
 
 Example Playbook
 ----------------
