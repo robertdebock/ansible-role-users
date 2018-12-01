@@ -14,6 +14,10 @@ platforms:
       url: registry.fedoraproject.org
 provisioner:
   name: ansible
+  inventory:
+    host_vars:
+      users-fedora-rawhide:
+        ansible_python_interpreter: /usr/bin/python3
   lint:
     name: ansible-lint
 scenario:
