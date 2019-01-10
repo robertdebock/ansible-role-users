@@ -81,7 +81,7 @@
   become: no
   run_once: yes
 
-- name: read generated ssh key
+- name: read generated public ssh key
   command: cat "{{ users_ssh_key_directory }}/{{ item.name }}.pub"
   with_items:
     - "{{ users_user_list }}"
@@ -129,7 +129,7 @@
   loop_control:
     label: "{{ item.name }}"
 
-- name: place ssh_public_key
+- name: place generated ssh_public_key
   authorized_key:
     user: "{{ item.item.name }}"
     state: present
@@ -140,5 +140,38 @@
     - ssh_public_key.results is defined
     - item.item.manage_ssh_key is defined
     - item.item.manage_ssh_key
+  loop_control:
+    label: "{{ item.item.name }}"
+
+- name: read generated private ssh key
+  command: cat "{{ users_ssh_key_directory }}/{{ item.name }}"
+  with_items:
+    - "{{ users_user_list }}"
+  when:
+    - users_user_list is defined
+    - item.manage_ssh_key is defined
+    - item.manage_ssh_key
+    - item.copy_private_key is defined
+    - item.copy_private_key
+  changed_when: no
+  register: ssh_private_key
+  delegate_to: localhost
+  become: no
+  loop_control:
+    label: "{{ item.name }}"
+  run_once: yes
+
+- name: place generated ssh_private_key
+  copy:
+    dest: "{{ item.item.name }}"
+    content: "{{ item.stdout }}"
+  with_items:
+    - "{{ ssh_private_key.results }}"
+  when:
+    - ssh_public_key.results is defined
+    - item.item.manage_ssh_key is defined
+    - item.item.manage_ssh_key
+    - item.copy_private_key is defined
+    - item.copy_private_key
   loop_control:
     label: "{{ item.item.name }}"
