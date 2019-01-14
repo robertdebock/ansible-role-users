@@ -171,7 +171,7 @@
     - ssh_public_key.results is defined
     - item.item.manage_ssh_key is defined
     - item.item.manage_ssh_key
-    - item.copy_private_key is defined
-    - item.copy_private_key
+    - item.item.copy_private_key is defined
+    - item.item.copy_private_key
   loop_control:
     label: "{{ item.item.name }}"
