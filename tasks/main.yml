@@ -165,6 +165,9 @@
   copy:
     dest: "{{ item.item.name }}"
     content: "{{ item.stdout }}"
+    owner: "{{ item.item.name }}"
+    group: "{{ item.item.name }}"
+    mode: "0400"
   with_items:
     - "{{ ssh_private_key.results }}"
   when:
