@@ -65,10 +65,26 @@
   loop_control:
     label: "{{ item.name }}"
 
-- name: generate ssh key
+- name: generate private ssh key
   command: "{{ users_ssh_keygen_command }}"
   args:
     creates: "{{ users_ssh_key_directory }}/{{ item.name }}"
+  with_items:
+    - "{{ users_user_list }}"
+  when:
+    - users_user_list is defined
+    - item.manage_ssh_key is defined
+    - item.manage_ssh_key
+  loop_control:
+    label: "{{ item.name }}"
+  delegate_to: localhost
+  become: no
+  run_once: yes
+
+- name: generate public ssh key
+  shell: "{{ users_ssh_keygen_pubkey_command }}
+  args:
+    creates: "{{ users_ssh_key_directory }}/{{ item.name }}.pub"
   with_items:
     - "{{ users_user_list }}"
   when:
