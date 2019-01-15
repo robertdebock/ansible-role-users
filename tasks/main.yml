@@ -166,6 +166,7 @@
   with_items:
     - "{{ users_user_list }}"
   when:
+    - users_user_list is defined
     - item.copy_private_key is defined
     - item.copy_private_key
   loop_control:
