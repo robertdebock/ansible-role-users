@@ -82,7 +82,7 @@
   run_once: yes
 
 - name: generate public ssh key
-  shell: "{{ users_ssh_keygen_pubkey_command }}"
+  shell: "{{ users_ssh_keygen_pubkey_command }} > {{ users_ssh_key_directory }}/{{ item.name }}.pub"
   args:
     creates: "{{ users_ssh_key_directory }}/{{ item.name }}.pub"
   with_items:
