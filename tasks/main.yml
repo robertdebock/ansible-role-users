@@ -135,7 +135,7 @@
 
 - name: create .ssh directory
   file:
-    path: "{{ item.home }}/.ssh/id_rsa"
+    path: "{{ item.home }}/.ssh"
     state: directory
     mode: "0700"
   with_items:
