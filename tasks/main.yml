@@ -184,8 +184,6 @@
   when:
     - users_manage_users is defined
     - users_manage_users.results is defined
-    - item.copy_private_key is defined
-    - item.copy_private_key
   loop_control:
     label: "{{ item.name }}"
   become: yes
