@@ -50,21 +50,12 @@
   loop_control:
     label: "{{ item.name }}"
 
-- name: create ssh_key_directory
+- name: create local ssh_key_directory
   file:
     path: "{{ users_ssh_key_directory }}"
     state: directory
   delegate_to: localhost
   become: no
-  run_once: yes
-  with_items:
-    - "{{ users_user_list }}"
-  when:
-    - users_user_list is defined
-    - item.manage_ssh_key is defined
-    - item.manage_ssh_key
-  loop_control:
-    label: "{{ item.name }}"
 
 - name: generate private ssh key
   command: "{{ users_ssh_keygen_command }}"
@@ -80,7 +71,6 @@
     label: "{{ item.name }}"
   delegate_to: localhost
   become: no
-  run_once: yes
 
 - name: generate public ssh key
   shell: "{{ users_ssh_keygen_pubkey_command }} > {{ users_ssh_key_directory }}/{{ item.name }}.pub"
@@ -96,7 +86,6 @@
     label: "{{ item.name }}"
   delegate_to: localhost
   become: no
-  run_once: yes
 
 - name: read generated public ssh key
   command: cat "{{ users_ssh_key_directory }}/{{ item.name }}.pub"
@@ -112,7 +101,6 @@
   become: no
   loop_control:
     label: "{{ item.name }}"
-  run_once: yes
 
 - name: convert ssh key to ppk
   shell: >
@@ -131,7 +119,6 @@
   become: no
   loop_control:
     label: "{{ item.name }}"
-  run_once: yes
 
 - name: create .ssh directory
   file:
@@ -145,6 +132,7 @@
   when:
     - users_manage_users is defined
     - users_manage_users.results is defined
+    - item.home is defined
   loop_control:
     label: "{{ item.name }}"
 
@@ -179,12 +167,14 @@
   copy:
     src: "{{ users_ssh_key_directory }}/{{ item.name }}"
     dest: "{{ item.home }}/.ssh/id_rsa"
+    mode: "0400"
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
   with_items:
     - "{{ users_manage_users.results }}"
   when:
     - users_manage_users is defined
     - users_manage_users.results is defined
-  loop_control:
-    label: "{{ item.name }}"
-  become: yes
-  become_user: "{{ item.name }}"
+    - item.home is defined
+   loop_control:
+     label: "{{ item.name }}"
