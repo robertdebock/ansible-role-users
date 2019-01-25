@@ -165,16 +165,20 @@
 
 - name: copy generated private ssh key
   copy:
-    src: "{{ users_ssh_key_directory }}/{{ item.name }}"
-    dest: "{{ item.home }}/.ssh/id_rsa"
+    src: "{{ users_ssh_key_directory }}/{{ item.1.name }}"
+    dest: "{{ item.1.home }}/.ssh/id_rsa"
     mode: "0400"
-    owner: "{{ item.name }}"
-    group: "{{ item.group }}"
-  with_items:
+    owner: "{{ item.1.name }}"
+    group: "{{ item.1.group }}"
+  with_together:
+    - "{{ users_user_list }}"
     - "{{ users_manage_users.results }}"
   when:
     - users_manage_users is defined
     - users_manage_users.results is defined
-    - item.home is defined
+    - item.0.name == item.1.name
+    - item.1.home is defined
+    - item.0.copy_private_key is defined
+    - item.0.copy_private_key
   loop_control:
-    label: "{{ item.name }}"
+    label: "{{ item.0.name }}"
