@@ -176,5 +176,5 @@
     - users_manage_users is defined
     - users_manage_users.results is defined
     - item.home is defined
-   loop_control:
-     label: "{{ item.name }}"
+  loop_control:
+    label: "{{ item.name }}"
