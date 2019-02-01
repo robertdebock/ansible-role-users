@@ -1,0 +1,6 @@
+---
+- name: manage group {{ group.name }}
+  group:
+    name: "{{ group.name }}"
+    state: "{{ group.state | default('present') }}"
+    gid: "{{ group.gid | default(omit) }}"

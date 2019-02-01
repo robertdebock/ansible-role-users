@@ -1,0 +1,6 @@
+---
+- name: place authorized_key for {{ user.name }}
+  authorized_key:
+    user: "{{ user.name }}"
+    state: present
+    key: "{{ authorized_key }}"
