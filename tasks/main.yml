@@ -14,6 +14,8 @@
   loop_control:
     label: "{{ group.name }}"
     loop_var: group
+  when:
+   - users_group_list is defined
 
 - name: loop over users_user_list
   include: user.yml
@@ -22,6 +24,8 @@
   loop_control:
     label: "{{ user.name }}"
     loop_var: user
+  when:
+    - users_user_list is defined
 
 - name: manage cron permission
   template:
