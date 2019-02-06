@@ -15,7 +15,7 @@
     label: "{{ group.name }}"
     loop_var: group
   when:
-   - users_group_list is defined
+    - users_group_list is defined
 
 - name: loop over users_user_list
   include: user.yml
