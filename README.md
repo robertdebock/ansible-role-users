@@ -47,7 +47,6 @@ This example is taken from `molecule/default/playbook.yml`:
   roles:
     - robertdebock.bootstrap
     - robertdebock.users
-
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -89,7 +88,8 @@ users_ssh_key_directory: ssh_keys
 #     state: absent
 #   - name: keyuser
 #     manage_ssh_key: yes
-
+#   - name: specificshell
+#     shell: "/bin/ksh"
 ```
 
 Requirements

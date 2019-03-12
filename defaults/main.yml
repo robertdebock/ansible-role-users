@@ -30,3 +30,5 @@ users_ssh_key_directory: ssh_keys
 #     state: absent
 #   - name: keyuser
 #     manage_ssh_key: yes
+#   - name: specificshell
+#     shell: "/bin/ksh"
