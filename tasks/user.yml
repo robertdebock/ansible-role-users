@@ -9,7 +9,7 @@
     uid: "{{ user.uid | default(omit) }}"
     group: "{{ user.group | default(omit) }}"
     groups: "{{ user.groups | default(omit) }}"
-    shell: "{{ user.shell | default(omit) }}"
+    shell: "{{ user.shell | default(users_shell) }}"
   register: users_manage_user
 
 - name: set sudo options for {{ user.name }}

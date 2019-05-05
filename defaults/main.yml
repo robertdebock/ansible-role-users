@@ -4,6 +4,9 @@
 # The location to store ssh keys for user
 users_ssh_key_directory: ssh_keys
 
+# The default shell if not overwritten.
+users_shell: /bin/bash
+
 # A list of groups and properties.
 # users_group_list:
 #   - name: robertdb

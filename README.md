@@ -16,19 +16,6 @@ This example is taken from `molecule/default/playbook.yml`:
   become: yes
   gather_facts: yes
 
-  roles:
-    - robertdebock.users
-```
-
-The machine you are running this on, may need to be prepared. Tests have been done on machines prepared by this playbook:
-```yaml
----
-- name: Prepare
-  hosts: all
-  gather_facts: no
-  become: yes
-  serial: 30%
-
   vars:
     users_group_list:
       - name: robertdb
@@ -47,7 +34,7 @@ The machine you are running this on, may need to be prepared. Tests have been do
         groups: users
         cron_allow: yes
         sudo_options: "ALL=(ALL) NOPASSWD: ALL"
-        authorized_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWswOogkZz/ihQA0lENCwDwSzmtmBWtFwzIzDlfa+eb4rBt6rZBg7enKeMqYtStI/NDneBwZUFBDIMu5zJTbvg7A60/WDhWXZmU21tZnm8K7KREFYOUndc6h//QHig6IIaIwwBZHF1NgXLtZ0qrUUlNU5JSEhDJsObMlPHtE4vFP8twPnfc7hxAnYma5+knU6qTMCDvhBE5tGJdor4UGeAhu+SwSVDloYtt1vGTmnFn8M/OD/fRMksusPefxyshJ37jpB4jY/Z9vzaNHwcj33prwl1b/xRfxr/+KRJsyq+ZKs9u2TVw9g4p+XLdfDtzZ8thR2P3x3MFrZOdFmCbo/5"
+        authorized_key: "ssh-rsa ABC123"
       - name: notuser
         state: absent
       - name: keyuser
@@ -55,6 +42,18 @@ The machine you are running this on, may need to be prepared. Tests have been do
       - name: privkeyuser
         manage_ssh_key: yes
         copy_private_key: yes
+
+  roles:
+    - robertdebock.users
+```
+
+The machine you are running this on, may need to be prepared. Tests have been done on machines prepared by this playbook:
+```yaml
+---
+- name: Prepare
+  hosts: all
+  gather_facts: no
+  become: yes
 
   roles:
     - robertdebock.bootstrap
@@ -72,6 +71,9 @@ These variables are set in `defaults/main.yml`:
 
 # The location to store ssh keys for user
 users_ssh_key_directory: ssh_keys
+
+# The default shell if not overwritten.
+users_shell: /bin/bash
 
 # A list of groups and properties.
 # users_group_list:
