@@ -30,6 +30,15 @@
       - name: privkeyuser
         manage_ssh_key: yes
         copy_private_key: yes
+      - name: multiplekeys
+        authorized_keys:
+          - "ssh-rsa ABC1234"
+          - "ssh-rsa ABC12345"
+      - name: mixedkeys
+        authorized_key: "ssh-rsa ABC123456"
+        authorized_keys:
+          - "ssh-rsa ABC1234567"
+          - "ssh-rsa ABC12345678"
 
   roles:
     - ansible-role-users

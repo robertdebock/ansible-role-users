@@ -81,10 +81,19 @@
     - users_manage_user is defined
     - user.home is defined
 
-- name: loop over authorized_key and authorized_keys for {{ user.name }}
+- name: loop over authorized_key for {{ user.name }}
   include: user_authorized_key.yml
   with_items:
     - "{{ user.authorized_key }}"
+  loop_control:
+    label: "{{ user.name }}"
+    loop_var: authorized_key
+  when:
+    - user.authorized_key is defined
+
+- name: loop over  authorized_keys for {{ user.name }}
+  include: user_authorized_key.yml
+  with_items:
     - "{{ user.authorized_keys }}"
   loop_control:
     label: "{{ user.name }}"
