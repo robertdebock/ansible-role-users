@@ -21,6 +21,15 @@
   loop_control:
     label: "{{ user.name }}"
 
+- name: remove sudo options for {{ user.name }}
+  file:
+    path: "/etc/sudoers.d/{{ user.name }}"
+    state: absent
+  when:
+    - user.sudo_options is not defined
+  loop_control:
+    label: "{{ user.name }}"
+
 - name: generate private ssh key for {{ user.name }}
   command: "{{ users_ssh_keygen_command }}"
   args:
