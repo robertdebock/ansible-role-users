@@ -36,7 +36,7 @@
     creates: "{{ users_ssh_key_directory }}/{{ user.name }}"
   when:
     - user.manage_ssh_key is defined
-    - user.manage_ssh_key
+    - user.manage_ssh_key | bool
   loop_control:
     label: "{{ user.name }}"
   delegate_to: localhost
@@ -48,7 +48,7 @@
     creates: "{{ users_ssh_key_directory }}/{{ user.name }}.pub"
   when:
     - user.manage_ssh_key is defined
-    - user.manage_ssh_key
+    - user.manage_ssh_key | bool
   loop_control:
     label: "{{ user.name }}"
   delegate_to: localhost
@@ -58,7 +58,7 @@
   command: cat "{{ users_ssh_key_directory }}/{{ user.name }}.pub"
   when:
     - user.manage_ssh_key is defined
-    - user.manage_ssh_key
+    - user.manage_ssh_key | bool
   changed_when: no
   register: ssh_public_key
   delegate_to: localhost
@@ -75,7 +75,7 @@
     creates: "{{ users_ssh_key_directory }}/{{ user.name }}.ppk"
   when:
     - user.manage_ssh_key is defined
-    - user.manage_ssh_key
+    - user.manage_ssh_key | bool
   delegate_to: localhost
   become: no
 
@@ -120,7 +120,7 @@
   when:
     - ssh_public_key is defined
     - user.manage_ssh_key is defined
-    - user.manage_ssh_key
+    - user.manage_ssh_key | bool
   loop_control:
     label: "{{ user.name }}"
 
@@ -136,6 +136,6 @@
   when:
     - users_manage_user is defined
     - user.copy_private_key is defined
-    - user.copy_private_key
+    - user.copy_private_key | bool
   loop_control:
     label: "{{ user.name }}"
