@@ -6,3 +6,4 @@
 
   roles:
     - robertdebock.bootstrap
+    - robertdebock.core_dependencies
