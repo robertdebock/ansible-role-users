@@ -2,3 +2,4 @@ molecule/*/.molecule
 *.log
 molecule/*/ssh_keys
 *.swp
+.tox

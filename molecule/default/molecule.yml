@@ -8,57 +8,14 @@ lint:
 driver:
   name: docker
 platforms:
-  - name: users-alpine-edge
-    image: alpine:edge
-    pre_build_image: yes
-    command: sh -c "while true ; do sleep 1 ; done"
-  - name: users-alpine-latest
-    image: alpine:latest
-    pre_build_image: yes
-    command: sh -c "while true ; do sleep 1 ; done"
-  - name: users-archlinux
-    image: archlinux/base
-    pre_build_image: yes
-  - name: users-centos-6
-    image: centos:6
-    pre_build_image: yes
-  - name: users-centos-latest
-    image: centos:latest
-    pre_build_image: yes
-  - name: users-debian-stable
-    image: debian:stable
-    pre_build_image: yes
-  - name: users-debian-unstable
-    image: debian:unstable
-    pre_build_image: yes
-  - name: users-fedora-latest
-    image: fedora:latest
-    pre_build_image: yes
-  - name: users-fedora-rawhide
-    image: fedora:rawhide
-    pre_build_image: yes
-  - name: users-opensuse-leap
-    image: opensuse/leap
-    pre_build_image: yes
-  - name: users-ubuntu-latest
-    image: ubuntu:latest
-    pre_build_image: yes
-  - name: users-ubuntu-rolling
-    image: ubuntu:rolling
-    pre_build_image: yes
-  - name: users-ubuntu-devel
-    image: ubuntu:devel
+  - name: "${image:-default}-${TOX_ENVNAME:-default}"
+    image: "${namespace}${image:-docker-fedora-systemd}:${tag:-latest}"
+    command: sh -c "while true ; do sleep 30 ; done"
     pre_build_image: yes
 provisioner:
   name: ansible
   playbooks:
-    prepare: ../resources/prepare.yml
-    converge: ../resources/playbook.yml
-  inventory:
-    host_vars:
-      users-fedora-latest:
-        ansible_python_interpreter: /usr/bin/python3
-      users-fedora-rawhide:
-        ansible_python_interpreter: /usr/bin/python3
+    prepare: prepare.yml
+    converge: playbook.yml
 scenario:
   name: default
