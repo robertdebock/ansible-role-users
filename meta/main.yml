@@ -42,6 +42,5 @@ galaxy_info:
     - server
     - sudo
     - system
-    - ubuntu
 
 dependencies: []
