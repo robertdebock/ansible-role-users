@@ -38,7 +38,7 @@ galaxy_info:
   galaxy_tags:
     - users
     - centos
-    - rhel
+    - redhat
     - server
     - sudo
     - system
