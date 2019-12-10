@@ -206,23 +206,6 @@ image="centos" tox
 image="debian" tag="stable" tox
 ```
 
-Modules
--------
-
-This role uses the following modules:
-```yaml
----
-- authorized_key
-- command
-- copy
-- file
-- group
-- include
-- shell
-- template
-- user
-```
-
 License
 -------
 
