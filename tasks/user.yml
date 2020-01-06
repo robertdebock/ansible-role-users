@@ -82,14 +82,15 @@
 
 - name: create .ssh directory for {{ user.name }}
   file:
-    path: "{{ user.home }}/.ssh"
+    path: "{{ item.home }}/.ssh"
     state: directory
     mode: "0700"
   become: yes
   become_user: "{{ user.name }}"
+  with_items:
+    - "{{ users_manage_user }}"
   when:
     - users_manage_user is defined
-    - user.home is defined
 
 - name: loop over authorized_key for {{ user.name }}
   include: user_authorized_key.yml
