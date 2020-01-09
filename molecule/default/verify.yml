@@ -1,0 +1,15 @@
+---
+- name: Verify
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  tasks:
+    - name: record status of .ssh
+      stat:
+        path: /home/keyuser/.ssh
+      register: result
+    - name: check status of .ss
+      assert:
+        that:
+          - result.stat.exists

@@ -82,14 +82,14 @@
 
 - name: create .ssh directory for {{ user.name }}
   file:
-    path: "{{ user.home }}/.ssh"
+    path: ".ssh"
     state: directory
     mode: "0700"
   become: yes
   become_user: "{{ user.name }}"
   when:
-    - users_manage_user is defined
-    - user.home is defined
+    - user.manage_ssh_key is defined
+    - user.manage_ssh_key
 
 - name: loop over authorized_key for {{ user.name }}
   include: user_authorized_key.yml
@@ -128,7 +128,7 @@
 - name: copy generated private ssh key for {{ user.name }}
   copy:
     src: "{{ users_ssh_key_directory }}/{{ item.name }}"
-    dest: "{{ item.home }}/.ssh/id_rsa"
+    dest: ".ssh/id_rsa"
     mode: "0400"
     owner: "{{ item.name }}"
     group: "{{ item.group }}"
