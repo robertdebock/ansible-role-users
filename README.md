@@ -75,6 +75,24 @@ The machine you are running this on, may need to be prepared, I use this playboo
     - robertdebock.core_dependencies
 ```
 
+After running this role, this playbook runs to verify that everything works, this may be a good example how you can use this role.
+```yaml
+---
+- name: Verify
+  hosts: all
+  become: yes
+  gather_facts: yes
+
+  tasks:
+    - name: record status of .ssh
+      stat:
+        path: /home/keyuser/.ssh
+      register: result
+    - name: check status of .ss
+      assert:
+        that:
+          - result.stat.exists
+```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
 
@@ -162,7 +180,7 @@ This role has been tested on these [container images](https://hub.docker.com/):
 |el|7, 8|
 |fedora|all|
 |opensuse|all|
-|ubuntu|artful, bionic|
+|ubuntu|bionic|
 
 The minimum version of Ansible required is 2.8 but tests have been done to:
 
