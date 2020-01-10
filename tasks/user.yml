@@ -82,7 +82,7 @@
 
 - name: create .ssh directory for {{ user.name }}
   file:
-    path: ".ssh"
+    path: "/home/{{ user.name }}/.ssh"
     state: directory
     mode: "0700"
   become: yes
@@ -128,7 +128,7 @@
 - name: copy generated private ssh key for {{ user.name }}
   copy:
     src: "{{ users_ssh_key_directory }}/{{ item.name }}"
-    dest: ".ssh/id_rsa"
+    dest: "/home/{{ user.name }}/.ssh/id_rsa"
     mode: "0400"
     owner: "{{ item.name }}"
     group: "{{ item.group }}"
