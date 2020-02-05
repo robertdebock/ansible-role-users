@@ -60,6 +60,7 @@
   when:
     - user.manage_ssh_key is defined
     - user.manage_ssh_key | bool
+  check_mode: no
   changed_when: no
   register: ssh_public_key
   delegate_to: localhost
