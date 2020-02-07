@@ -11,8 +11,7 @@
 
 - name: loop over users_group_list
   include: group.yml
-  with_items:
-    - "{{ users_group_list }}"
+  loop: "{{ users_group_list }}"
   loop_control:
     label: "{{ group.name }}"
     loop_var: group
@@ -21,8 +20,7 @@
 
 - name: loop over users_user_list
   include: user.yml
-  with_items:
-    - "{{ users_user_list }}"
+  loop: "{{ users_user_list }}"
   loop_control:
     label: "{{ user.name }}"
     loop_var: user
