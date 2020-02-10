@@ -3,4 +3,5 @@
   authorized_key:
     user: "{{ user.name }}"
     state: present
-    key: "{{ authorized_key }}"
+    key: "{{ item }}"
+  loop: "{{ user.authorized_keys }}"
