@@ -133,7 +133,7 @@
     mode: "0400"
     owner: "{{ item.name }}"
     group: "{{ item.group }}"
-  loop: "{{ users_manage_user.split }}"
+  loop: "{{ users_manage_user }}"
   when:
     - users_manage_user is defined
     - user.copy_private_key is defined
