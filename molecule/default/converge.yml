@@ -22,7 +22,8 @@
         groups: users
         cron_allow: yes
         sudo_options: "ALL=(ALL) NOPASSWD: ALL"
-        authorized_key: "ssh-rsa ABC123"
+        authorized_keys:
+          - "ssh-rsa ABC123"
       - name: notuser
         state: absent
       - name: keyuser
@@ -34,11 +35,6 @@
         authorized_keys:
           - "ssh-rsa ABC1234"
           - "ssh-rsa ABC12345"
-      - name: mixedkeys
-        authorized_key: "ssh-rsa ABC123456"
-        authorized_keys:
-          - "ssh-rsa ABC1234567"
-          - "ssh-rsa ABC12345678"
       - name: passuser
         password: "$6$mysecretsalt$qJbapG68nyRab3gxvKWPUcs2g3t0oMHSHMnSKecYNpSi3CuZm.GbBqXO8BE6EI6P1JUefhA0qvD7b5LSh./PU1"
         update_password: on_create

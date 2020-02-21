@@ -94,10 +94,6 @@
 
 - name: loop over authorized_key for {{ user.name }}
   include: user_authorized_key.yml
-  loop: "{{ user.authorized_key }}"
-  loop_control:
-    label: "{{ user.name }}"
-    loop_var: authorized_key
   when:
     - user.authorized_key is defined
 
@@ -122,18 +118,14 @@
   loop_control:
     label: "{{ user.name }}"
 
-- name: show shit
-  debug:
-    msg: "{{ users_manage_user }}"
-
 - name: copy generated private ssh key for {{ user.name }}
   copy:
-    src: "{{ users_ssh_key_directory }}/{{ item.name }}"
+    src: "{{ users_ssh_key_directory }}/{{ user.name }}"
     dest: "/home/{{ user.name }}/.ssh/id_rsa"
     mode: "0400"
-    owner: "{{ item.name }}"
-    group: "{{ item.group }}"
-  loop: "{{ users_manage_user }}"
+    owner: "{{ user.name }}"
+    group: "{{ user.group | default(omit) }}"
+  loop: "{{ lookup('dict', users_manage_user, wantlist=True) }}"
   when:
     - users_manage_user is defined
     - user.copy_private_key is defined
