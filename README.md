@@ -36,7 +36,8 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
         groups: users
         cron_allow: yes
         sudo_options: "ALL=(ALL) NOPASSWD: ALL"
-        authorized_key: "ssh-rsa ABC123"
+        authorized_keys:
+          - "ssh-rsa ABC123"
       - name: notuser
         state: absent
       - name: keyuser
@@ -48,11 +49,6 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
         authorized_keys:
           - "ssh-rsa ABC1234"
           - "ssh-rsa ABC12345"
-      - name: mixedkeys
-        authorized_key: "ssh-rsa ABC123456"
-        authorized_keys:
-          - "ssh-rsa ABC1234567"
-          - "ssh-rsa ABC12345678"
       - name: passuser
         password: "$6$mysecretsalt$qJbapG68nyRab3gxvKWPUcs2g3t0oMHSHMnSKecYNpSi3CuZm.GbBqXO8BE6EI6P1JUefhA0qvD7b5LSh./PU1"
         update_password: on_create
@@ -111,35 +107,6 @@ users_shell: /bin/bash
 
 # manage cron permissions via /etc/cron.allow
 users_cron_allow: true
-
-# A list of groups and properties.
-# users_group_list:
-#   - name: robertdb
-#     gid: 1024
-#   - name: notgroup
-#     state: absent
-
-# A list of users and properties.
-# users_user_list:
-#   - name: root
-#     cron_allow: yes
-#   - name: robertdb
-#     comment: Robert de Bock
-#     uid: 1024
-#     group: robertdb
-#     groups: users,wheel
-#     cron_allow: yes
-#     sudo_options: "ALL=(ALL) NOPASSWD: ALL"
-#     authorized_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWswOogkZz/ihQA0lENCwDwSzmtmBWtFwzIzDlfa+eb4rBt6rZBg7enKeMqYtStI/NDneBwZUFBDIMu5zJTbvg7A60/WDhWXZmU21tZnm8K7KREFYOUndc6h//QHig6IIaIwwBZHF1NgXLtZ0qrUUlNU5JSEhDJsObMlPHtE4vFP8twPnfc7hxAnYma5+knU6qTMCDvhBE5tGJdor4UGeAhu+SwSVDloYtt1vGTmnFn8M/OD/fRMksusPefxyshJ37jpB4jY/Z9vzaNHwcj33prwl1b/xRfxr/+KRJsyq+ZKs9u2TVw9g4p+XLdfDtzZ8thR2P3x3MFrZOdFmCbo/5"
-#      authorized_keys:
-#        - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCWswOogkZz/ihQA0lENCwDwSzmtmBWtFwzIzDlfa+eb4rBt6rZBg7enKeMqYtStI/NDneBwZUFBDIMu5zJTbvg7A60/WDhWXZmU21tZnm8K7KREFYOUndc6h//QHig6IIaIwwBZHF1NgXLtZ0qrUUlNU5JSEhDJsObMlPHtE4vFP8twPnfc7hxAnYma5+knU6qTMCDvhBE5tGJdor4UGeAhu+SwSVDloYtt1vGTmnFn8M/OD/fRMksusPefxyshJ37jpB4jY/Z9vzaNHwcj33prwl1b/xRfxr/+KRJsyq+ZKs9u2TVw9g4p+XLdfDtzZ8thR2P3x3MFrZOdFmCbo/5"
-#     copy_private_key: yes
-#   - name: notuser
-#     state: absent
-#   - name: keyuser
-#     manage_ssh_key: yes
-#   - name: specificshell
-#     shell: "/bin/ksh"
 ```
 
 Requirements
