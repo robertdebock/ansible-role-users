@@ -1,14 +1,5 @@
 ---
 # tasks file for users
-- name: create local ssh_key_directory
-  file:
-    path: "{{ users_ssh_key_directory }}"
-    state: directory
-  when:
-    - '"manage_ssh_key: yes" in users_user_list'
-  delegate_to: localhost
-  become: no
-
 - name: loop over users_group_list
   include: group.yml
   loop: "{{ users_group_list }}"

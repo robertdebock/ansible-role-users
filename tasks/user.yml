@@ -1,5 +1,15 @@
 ---
 # tasks file for users
+- name: create local ssh_key_directory
+  file:
+    path: "{{ users_ssh_key_directory }}"
+    state: directory
+  when:
+    - user.manage_ssh_key is defined
+    - user.manage_ssh_key | bool
+  delegate_to: localhost
+  become: no
+
 - name: manage users {{ user.name }}
   user:
     name: "{{ user.name }}"
