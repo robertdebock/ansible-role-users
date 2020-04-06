@@ -40,4 +40,4 @@
         update_password: on_create
 
   roles:
-    - ansible-role-users
+    - role: ansible-role-users

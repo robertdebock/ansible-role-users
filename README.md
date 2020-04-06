@@ -52,7 +52,7 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
         update_password: on_create
 
   roles:
-    - robertdebock.users
+    - role: robertdebock.users
 ```
 
 The machine may need to be prepared using `molecule/resources/prepare.yml`:
