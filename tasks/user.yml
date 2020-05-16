@@ -72,7 +72,7 @@
     - user.manage_ssh_key | bool
   check_mode: no
   changed_when: no
-  register: ssh_public_key
+  register: users_ssh_public_key
   delegate_to: localhost
   become: no
   loop_control:
@@ -116,13 +116,13 @@
   when:
     - user.authorized_keys is defined
 
-- name: place generated ssh_public_key for {{ user.name }}
+- name: place generated users_ssh_public_key for {{ user.name }}
   authorized_key:
     user: "{{ user.name }}"
     state: present
-    key: "{{ ssh_public_key.stdout }}"
+    key: "{{ users_ssh_public_key.stdout }}"
   when:
-    - ssh_public_key is defined
+    - users_ssh_public_key is defined
     - user.manage_ssh_key is defined
     - user.manage_ssh_key | bool
   loop_control:
