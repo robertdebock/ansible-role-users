@@ -107,7 +107,7 @@
   when:
     - user.authorized_key is defined
 
-- name: loop over  authorized_keys for {{ user.name }}
+- name: loop over authorized_keys for {{ user.name }}
   include: user_authorized_key.yml
   loop: "{{ user.authorized_keys }}"
   loop_control:
