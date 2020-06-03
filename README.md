@@ -16,43 +16,44 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
   become: yes
   gather_facts: yes
 
-  vars:
-    users_group_list:
-      - name: robertdb
-        gid: 1024
-      - name: users
-      - name: notgroup
-        state: absent
-
-    users_user_list:
-      - name: root
-        cron_allow: yes
-      - name: robertdb
-        comment: Robert de Bock
-        uid: 1024
-        group: robertdb
-        groups: users
-        cron_allow: yes
-        sudo_options: "ALL=(ALL) NOPASSWD: ALL"
-        authorized_keys:
-          - "ssh-rsa ABC123"
-      - name: notuser
-        state: absent
-      - name: keyuser
-        manage_ssh_key: yes
-      - name: privkeyuser
-        manage_ssh_key: yes
-        copy_private_key: yes
-      - name: multiplekeys
-        authorized_keys:
-          - "ssh-rsa ABC1234"
-          - "ssh-rsa ABC12345"
-      - name: passuser
-        password: "$6$mysecretsalt$qJbapG68nyRab3gxvKWPUcs2g3t0oMHSHMnSKecYNpSi3CuZm.GbBqXO8BE6EI6P1JUefhA0qvD7b5LSh./PU1"
-        update_password: on_create
-
   roles:
     - role: robertdebock.users
+      users_group_list:
+        - name: robertdb
+          gid: 1024
+        - name: users
+        - name: notgroup
+          state: absent
+
+      users_user_list:
+        - name: root
+          cron_allow: yes
+        - name: robertdb
+          comment: Robert de Bock
+          uid: 1024
+          group: robertdb
+          groups: users
+          cron_allow: yes
+          sudo_options: "ALL=(ALL) NOPASSWD: ALL"
+          authorized_keys:
+            - "ssh-rsa ABC123"
+        - name: notuser
+          state: absent
+        - name: keyuser
+          manage_ssh_key: yes
+        - name: privkeyuser
+          manage_ssh_key: yes
+          copy_private_key: yes
+        - name: multiplekeys
+          authorized_keys:
+            - "ssh-rsa ABC1234"
+            - "ssh-rsa ABC12345"
+        - name: passuser
+          password: "$6$mysecretsalt$qJbapG68nyRab3gxvKWPUcs2g3t0oMHSHMnSKecYNpSi3CuZm.GbBqXO8BE6EI6P1JUefhA0qvD7b5LSh./PU1"
+          update_password: on_create
+        - name: remotekey
+          authorized_keys:
+            - "https://raw.githubusercontent.com/shaanr/smdb/master/file.pub"
 ```
 
 The machine may need to be prepared using `molecule/resources/prepare.yml`:
