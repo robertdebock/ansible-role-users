@@ -95,7 +95,7 @@
   file:
     path: "/home/{{ user.name }}/.ssh"
     state: directory
-    mode: "0700"
+    mode: "700"
   become: yes
   become_user: "{{ user.name }}"
   when:
@@ -132,7 +132,7 @@
   copy:
     src: "{{ users_ssh_key_directory }}/{{ user.name }}"
     dest: "/home/{{ user.name }}/.ssh/id_rsa"
-    mode: "0400"
+    mode: "400"
     owner: "{{ user.name }}"
     group: "{{ user.group | default(omit) }}"
   loop: "{{ lookup('dict', users_manage_user, wantlist=True) }}"
