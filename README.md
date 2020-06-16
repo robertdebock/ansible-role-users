@@ -104,7 +104,7 @@ users_ssh_key_directory: ssh_keys
 users_shell: /bin/bash
 
 # manage cron permissions via /etc/cron.allow
-users_cron_allow: true
+users_cron_allow: yes
 ```
 
 ## [Requirements](#requirements)
