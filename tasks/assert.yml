@@ -30,6 +30,7 @@
     that:
       - item.name is defined
       - item.name | length > 0
+  loop: "{{ users_group_list }}"
   when:
     - users_group_list is defined
 
@@ -39,6 +40,7 @@
       - item.gid is defined
       - item.gid | int
       - item.gid | int > 0
+  loop: "{{ users_group_list }}"
   when:
     - users_group_list is defined
     - item.gid is defined
@@ -49,6 +51,7 @@
       - item.state is defined
       - item.state | length > 0
       - item.state in ["absent", "present"]
+  loop: "{{ users_group_list }}"
   when:
     - users_group_list is defined
     - item.state is defined
@@ -57,6 +60,7 @@
   assert:
     that:
       - users_user_list | length > 0
+  loop: "{{ users_user_list }}"
   when:
     - users_user_list is defined
 
