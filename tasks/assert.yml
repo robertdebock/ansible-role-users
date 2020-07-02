@@ -30,6 +30,7 @@
     that:
       - item.name is defined
       - item.name | length > 0
+    quiet: yes
   loop: "{{ users_group_list }}"
   when:
     - users_group_list is defined
@@ -40,6 +41,7 @@
       - item.gid is defined
       - item.gid | int
       - item.gid | int > 0
+    quiet: yes
   loop: "{{ users_group_list }}"
   when:
     - users_group_list is defined
@@ -51,6 +53,7 @@
       - item.state is defined
       - item.state | length > 0
       - item.state in ["absent", "present"]
+    quiet: yes
   loop: "{{ users_group_list }}"
   when:
     - users_group_list is defined
@@ -60,6 +63,7 @@
   assert:
     that:
       - users_user_list | length > 0
+    quiet: yes
   loop: "{{ users_user_list }}"
   when:
     - users_user_list is defined
@@ -69,6 +73,7 @@
     that:
       - item.name is defined
       - item.name | length > 0
+    quiet: yes
   loop: "{{ users_user_list }}"
   when:
     - users_user_list is defined
@@ -77,6 +82,7 @@
   assert:
     that:
       - item.cron_allow | type_debug == "bool"
+    quiet: yes
   loop: "{{ users_user_list }}"
   when:
     - users_user_list is defined
@@ -86,6 +92,7 @@
   assert:
     that:
       - item.comment | length > 0
+    quiet: yes
   loop: "{{ users_user_list }}"
   when:
     - users_user_list is defined
@@ -96,6 +103,7 @@
     that:
       - item.uid | int
       - item.uid | int >= 0
+    quiet: yes
   loop: "{{ users_user_list }}"
   when:
     - users_user_list is defined
@@ -105,6 +113,7 @@
   assert:
     that:
       - item.group | type_debug == "bool"
+    quiet: yes
   loop: "{{ users_user_list }}"
   when:
     - users_user_list is defined
@@ -114,6 +123,7 @@
   assert:
     that:
       - item.groups | length > 0
+    quiet: yes
   loop: "{{ users_user_list }}"
   when:
     - users_user_list is defined
@@ -123,6 +133,7 @@
   assert:
     that:
       - item.sudo_options | length > 0
+    quiet: yes
   loop: "{{ users_user_list }}"
   when:
     - users_user_list is defined
@@ -133,6 +144,7 @@
     that:
       - item.authorized_keys | length > 0
       - item.authorized_keys is iterable
+    quiet: yes
   loop: "{{ users_user_list }}"
   when:
     - users_user_list is defined
@@ -142,6 +154,7 @@
   assert:
     that:
       - item.manage_ssh_key | type_debug == "bool"
+    quiet: yes
   loop: "{{ users_user_list }}"
   when:
     - users_user_list is defined
@@ -151,6 +164,7 @@
   assert:
     that:
       - item.password | length > 0
+    quiet: yes
   loop: "{{ users_user_list }}"
   when:
     - users_user_list is defined
@@ -161,6 +175,7 @@
     that:
       - item.update_password | length > 0
       - item.update_password in ["always", "on_create"]
+    quiet: yes
   loop: "{{ users_user_list }}"
   when:
     - users_user_list is defined
