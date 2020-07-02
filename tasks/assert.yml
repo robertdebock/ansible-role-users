@@ -112,7 +112,7 @@
 - name: test if item.group in users_user_list is set correctly
   assert:
     that:
-      - item.group | type_debug == "bool"
+      - item.group | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
   when:
