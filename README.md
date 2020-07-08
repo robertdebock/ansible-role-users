@@ -188,6 +188,12 @@ image="debian" tag="stable" tox
 
 Apache-2.0
 
+## [Contributors](#contributors)
+
+I'd like to thank everybody that made contributions to this repository. It motivates me, improves the code and is just fun to collaborate.
+
+- [jkirk](https://github.com/jkirk)
+- [icklers](https://github.com/icklers)
 
 ## [Author Information](#author-information)
 
