@@ -65,19 +65,6 @@
   delegate_to: localhost
   become: no
 
-- name: read generated public ssh key for {{ user.name }}
-  command: cat "{{ users_ssh_key_directory }}/{{ user.name }}.pub"
-  when:
-    - user.manage_ssh_key is defined
-    - user.manage_ssh_key | bool
-  check_mode: no
-  changed_when: no
-  register: users_ssh_public_key
-  delegate_to: localhost
-  become: no
-  loop_control:
-    label: "{{ user.name }}"
-
 - name: convert ssh key to ppk for {{ user.name }}
   shell: >
          ssh-keygen -e -f "{{ users_ssh_key_directory }}/{{ user.name }}"
