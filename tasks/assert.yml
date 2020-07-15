@@ -32,6 +32,8 @@
       - item.name | length > 0
     quiet: yes
   loop: "{{ users_group_list }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - users_group_list is defined
 
@@ -43,6 +45,8 @@
       - item.gid | int > 0
     quiet: yes
   loop: "{{ users_group_list }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - users_group_list is defined
     - item.gid is defined
@@ -55,6 +59,8 @@
       - item.state in ["absent", "present"]
     quiet: yes
   loop: "{{ users_group_list }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - users_group_list is defined
     - item.state is defined
@@ -65,6 +71,8 @@
       - users_user_list | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - users_user_list is defined
 
@@ -75,6 +83,8 @@
       - item.name | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - users_user_list is defined
 
@@ -84,6 +94,8 @@
       - item.cron_allow | type_debug == "bool"
     quiet: yes
   loop: "{{ users_user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - users_user_list is defined
     - item.cron_allow is defined
@@ -94,6 +106,8 @@
       - item.comment | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - users_user_list is defined
     - item.comment is defined
@@ -105,6 +119,8 @@
       - item.uid | int >= 0
     quiet: yes
   loop: "{{ users_user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - users_user_list is defined
     - item.uid is defined
@@ -115,6 +131,8 @@
       - item.group | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - users_user_list is defined
     - item.group is defined
@@ -125,6 +143,8 @@
       - item.groups | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - users_user_list is defined
     - item.groups is defined
@@ -135,6 +155,8 @@
       - item.sudo_options | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - users_user_list is defined
     - item.sudo_options is defined
@@ -146,6 +168,8 @@
       - item.authorized_keys is iterable
     quiet: yes
   loop: "{{ users_user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - users_user_list is defined
     - item.authorized_keys is defined
@@ -156,6 +180,8 @@
       - item.manage_ssh_key | type_debug == "bool"
     quiet: yes
   loop: "{{ users_user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - users_user_list is defined
     - item.manage_ssh_key is defined
@@ -166,6 +192,8 @@
       - item.password | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - users_user_list is defined
     - item.password is defined
@@ -177,6 +205,8 @@
       - item.update_password in ["always", "on_create"]
     quiet: yes
   loop: "{{ users_user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - users_user_list is defined
     - item.update_password is defined
