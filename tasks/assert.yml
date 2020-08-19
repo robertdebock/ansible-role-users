@@ -4,24 +4,28 @@
     that:
       - users_ssh_key_directory is defined
       - users_ssh_key_directory | length > 0
+    quiet: yes
 
 - name: test if users_shell is set correctly
   assert:
     that:
       - users_shell is defined
       - users_shell | length > 0
+    quiet: yes
 
 - name: test if users_cron_allow is set correctly
   assert:
     that:
       - users_cron_allow is defined
       - users_cron_allow | type_debug == "bool"
+    quiet: yes
 
 - name: test if users_group_list is set correctly
   assert:
     that:
       - users_group_list | length > 0
       - users_group_list is iterable
+    quiet: yes
   when:
     - users_group_list is defined
 
