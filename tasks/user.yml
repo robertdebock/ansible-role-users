@@ -21,6 +21,7 @@
     groups: "{{ user.groups | default(omit) }}"
     shell: "{{ user.shell | default(users_shell) }}"
     update_password: "{{ user.update_password | default(omit) }}"
+    expires: "{{ user.expires | default(omit) }}"
   register: users_manage_user
 
 - name: set sudo options for {{ user.name }}
