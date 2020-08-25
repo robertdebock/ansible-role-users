@@ -37,6 +37,7 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
           sudo_options: "ALL=(ALL) NOPASSWD: ALL"
           authorized_keys:
             - "ssh-rsa ABC123"
+          expires: -1
         - name: notuser
           state: absent
         - name: keyuser
