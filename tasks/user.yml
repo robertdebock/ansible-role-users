@@ -115,3 +115,19 @@
     - user.copy_private_key | bool
   loop_control:
     label: "{{ user.name }}"
+
+- name: check users password valid time
+  shell: set -o pipefail ; getent shadow "{{ user.name }}" | cut -d':' -f5
+  register: users_pw_valid
+  changed_when: no
+  check_mode: no
+  when:
+    - user.state is defined and user.state != "absent" or
+      user.state is not defined
+
+- name: set users password valid time
+  command: chage -M "{{ user.password_validity_days }}" "{{ user.name }}"
+  when:
+    - user.password_validity_days is defined
+    - users_pw_valid.stdout is defined
+    - users_pw_valid.stdout !=  user.password_validity_days

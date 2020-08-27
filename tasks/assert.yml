@@ -214,3 +214,29 @@
   when:
     - users_user_list is defined
     - item.update_password is defined
+
+- name: test if item.exipres in users_user_list is set correctly
+  assert:
+    that:
+      - item.expires | int
+      - item.expires | int >= -1
+    quiet: yes
+  loop: "{{ users_user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - users_user_list is defined
+    - item.expires is defined
+
+- name: test if item.password_validity_days in users_user_list is set correctly
+  assert:
+    that:
+      - item.password_validity_days | int
+      - item.password_validity_days | int >= 0
+    quiet: yes
+  loop: "{{ users_user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - users_user_list is defined
+    - item.password_validity_days is defined

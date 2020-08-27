@@ -26,6 +26,7 @@
           authorized_keys:
             - "ssh-rsa ABC123"
           expires: -1
+          password_validity_days: 9
         - name: notuser
           state: absent
         - name: keyuser
