@@ -25,6 +25,7 @@
   template:
     src: cron.allow.j2
     dest: /etc/cron.allow
+    mode: "0640"
   when: users_cron_allow|bool
 
 - name: check existence of /etc/cron.allow
