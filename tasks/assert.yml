@@ -232,7 +232,7 @@
   assert:
     that:
       - item.password_validity_days | int
-      - item.password_validity_days | int >= 0
+      - item.password_validity_days | int >= -1
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
