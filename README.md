@@ -38,6 +38,7 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
           authorized_keys:
             - "ssh-rsa ABC123"
           expires: -1
+          password_validity_days: 9
         - name: notuser
           state: absent
         - name: keyuser
@@ -76,14 +77,14 @@ For verification `molecule/resources/verify.yml` run after the role has been app
 - name: Verify
   hosts: all
   become: yes
-  gather_facts: yes
+  gather_facts: no
 
   tasks:
     - name: record status of .ssh
       stat:
         path: /home/keyuser/.ssh
       register: result
-    - name: check status of .ss
+    - name: check status of .ssh
       assert:
         that:
           - result.stat.exists
@@ -193,6 +194,7 @@ Apache-2.0
 
 I'd like to thank everybody that made contributions to this repository. It motivates me, improves the code and is just fun to collaborate.
 
+- [aindenko](https://github.com/aindenko)
 - [jkirk](https://github.com/jkirk)
 - [icklers](https://github.com/icklers)
 

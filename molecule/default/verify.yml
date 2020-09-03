@@ -9,7 +9,7 @@
       stat:
         path: /home/keyuser/.ssh
       register: result
-    - name: check status of .ss
+    - name: check status of .ssh
       assert:
         that:
           - result.stat.exists

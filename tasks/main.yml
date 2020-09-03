@@ -3,6 +3,11 @@
 - name: include assert.yml
   include_tasks: assert.yml
 
+- name: install required software
+  package:
+    name: "{{ users_requirements }}"
+    state: present
+
 - name: loop over users_group_list
   include: group.yml
   loop: "{{ users_group_list }}"
