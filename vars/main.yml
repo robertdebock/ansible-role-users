@@ -3,6 +3,8 @@
 
 _users_requirements:
   default: []
+  Amazon:
+    - shadow
   Suse:
     - shadow
 
