@@ -5,3 +5,5 @@
     state: present
     key: "{{ item }}"
   loop: "{{ user.authorized_keys }}"
+  loop_control:
+    label: "{{ item | basename }}"
