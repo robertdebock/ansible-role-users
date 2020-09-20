@@ -108,7 +108,6 @@
     mode: "400"
     owner: "{{ user.name }}"
     group: "{{ user.group | default(omit) }}"
-  loop: "{{ lookup('dict', users_manage_user, wantlist=True) }}"
   when:
     - users_manage_user is defined
     - user.copy_private_key is defined
