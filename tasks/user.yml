@@ -21,7 +21,7 @@
     uid: "{{ user.uid | default(omit) }}"
     group: "{{ user.group | default(omit) }}"
     groups: "{{ user.groups | default(omit) }}"
-    home: "{{ user.home | default(omti) }}"
+    home: "{{ user.home | default(omit) }}"
     shell: "{{ user.shell | default(users_shell) }}"
     update_password: "{{ user.update_password | default(omit) }}"
     expires: "{{ user.expires | default(omit) }}"
