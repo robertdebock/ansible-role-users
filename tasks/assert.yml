@@ -20,6 +20,13 @@
       - users_cron_allow | type_debug == "bool"
     quiet: yes
 
+- name: test if users_create_home is set correctly
+  assert:
+    that:
+      - users_create_home is defined
+      - users_create_home | type_debug == "bool"
+    quiet: yes
+
 - name: test if users_group_list is set correctly
   assert:
     that:
@@ -115,6 +122,18 @@
   when:
     - users_user_list is defined
     - item.comment is defined
+
+- name: test if item.home in users_user_list is set correctly
+  assert:
+    that:
+      - item.home | length > 0
+    quiet: yes
+  loop: "{{ users_user_list }}"
+  loop_control:
+    label: "{{ item.name }}"
+  when:
+    - users_user_list is defined
+    - item.home is defined
 
 - name: test if item.uid in users_user_list is set correctly
   assert:

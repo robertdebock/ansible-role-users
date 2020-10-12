@@ -107,6 +107,9 @@ users_shell: /bin/bash
 
 # manage cron permissions via /etc/cron.allow
 users_cron_allow: yes
+
+# should homedirectories be created?
+users_create_home: yes
 ```
 
 ## [Requirements](#requirements)
