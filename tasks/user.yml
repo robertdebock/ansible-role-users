@@ -16,7 +16,7 @@
     name: "{{ user.name }}"
     state: "{{ user.state | default('present') }}"
     comment: "{{ user.comment | default(omit) }}"
-    create_home: "{{ user_create_home }}"
+    create_home: "{{ users_create_home }}"
     password: "{{ user.password | default(omit) }}"
     uid: "{{ user.uid | default(omit) }}"
     group: "{{ user.group | default(omit) }}"
