@@ -88,6 +88,13 @@ For verification `molecule/resources/verify.yml` runs after the role has been ap
       assert:
         that:
           - result.stat.exists
+    - name: check if user notuser does not exist
+      user:
+        name: notuser
+        state: absent
+      register: users_check_user_notuser
+      failed_when:
+        - users_check_user_notuser is changed
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
