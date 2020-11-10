@@ -67,7 +67,7 @@
     that:
       - item.state is defined
       - item.state | length > 0
-      - item.state in ["absent", "present"]
+      - item.state in [ "absent", "present" ]
     quiet: yes
   loop: "{{ users_group_list }}"
   loop_control:
@@ -225,7 +225,7 @@
   assert:
     that:
       - item.update_password | length > 0
-      - item.update_password in ["always", "on_create"]
+      - item.update_password in [ "always", "on_create" ]
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
