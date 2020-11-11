@@ -52,7 +52,7 @@
   assert:
     that:
       - item.gid is defined
-      - item.gid | int
+      - item.gid is number
       - item.gid | int > 0
     quiet: yes
   loop: "{{ users_group_list }}"
@@ -138,7 +138,7 @@
 - name: test if item.uid in users_user_list is set correctly
   assert:
     that:
-      - item.uid | int
+      - item.uid is number
       - item.uid | int >= 0
     quiet: yes
   loop: "{{ users_user_list }}"
@@ -237,7 +237,7 @@
 - name: test if item.exipres in users_user_list is set correctly
   assert:
     that:
-      - item.expires | int
+      - item.expires is number
       - item.expires | int >= -1
     quiet: yes
   loop: "{{ users_user_list }}"
@@ -250,7 +250,7 @@
 - name: test if item.password_validity_days in users_user_list is set correctly
   assert:
     that:
-      - item.password_validity_days | int
+      - item.password_validity_days is number
       - item.password_validity_days | int >= -1
     quiet: yes
   loop: "{{ users_user_list }}"
