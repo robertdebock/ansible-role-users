@@ -3,14 +3,12 @@
   assert:
     that:
       - users_ssh_key_directory is defined
-      - users_ssh_key_directory | length > 0
     quiet: yes
 
 - name: test if users_shell is set correctly
   assert:
     that:
       - users_shell is defined
-      - users_shell | length > 0
     quiet: yes
 
 - name: test if users_cron_allow is set correctly
@@ -30,7 +28,6 @@
 - name: test if users_group_list is set correctly
   assert:
     that:
-      - users_group_list | length > 0
       - users_group_list is iterable
     quiet: yes
   when:
@@ -40,7 +37,6 @@
   assert:
     that:
       - item.name is defined
-      - item.name | length > 0
     quiet: yes
   loop: "{{ users_group_list }}"
   loop_control:
@@ -66,7 +62,6 @@
   assert:
     that:
       - item.state is defined
-      - item.state | length > 0
       - item.state in [ "absent", "present" ]
     quiet: yes
   loop: "{{ users_group_list }}"
@@ -79,7 +74,6 @@
 - name: test if users_user_list is set correctly
   assert:
     that:
-      - users_user_list | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
@@ -91,7 +85,6 @@
   assert:
     that:
       - item.name is defined
-      - item.name | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
@@ -114,7 +107,6 @@
 - name: test if item.comment in users_user_list is set correctly
   assert:
     that:
-      - item.comment | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
@@ -126,7 +118,6 @@
 - name: test if item.home in users_user_list is set correctly
   assert:
     that:
-      - item.home | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
@@ -151,7 +142,6 @@
 - name: test if item.group in users_user_list is set correctly
   assert:
     that:
-      - item.group | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
@@ -163,7 +153,6 @@
 - name: test if item.groups in users_user_list is set correctly
   assert:
     that:
-      - item.groups | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
@@ -175,7 +164,6 @@
 - name: test if item.sudo_options in users_user_list is set correctly
   assert:
     that:
-      - item.sudo_options | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
@@ -187,7 +175,6 @@
 - name: test if item.authorized_keys in users_user_list is set correctly
   assert:
     that:
-      - item.authorized_keys | length > 0
       - item.authorized_keys is iterable
     quiet: yes
   loop: "{{ users_user_list }}"
@@ -212,7 +199,6 @@
 - name: test if item.password in users_user_list is set correctly
   assert:
     that:
-      - item.password | length > 0
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
@@ -224,7 +210,6 @@
 - name: test if item.update_password in users_user_list is set correctly
   assert:
     that:
-      - item.update_password | length > 0
       - item.update_password in [ "always", "on_create" ]
     quiet: yes
   loop: "{{ users_user_list }}"
