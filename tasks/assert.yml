@@ -49,7 +49,7 @@
     that:
       - item.gid is defined
       - item.gid is number
-      - item.gid | int > 0
+      - item.gid > 0
     quiet: yes
   loop: "{{ users_group_list }}"
   loop_control:
@@ -130,7 +130,7 @@
   assert:
     that:
       - item.uid is number
-      - item.uid | int >= 0
+      - item.uid >= 0
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
@@ -223,7 +223,7 @@
   assert:
     that:
       - item.expires is number
-      - item.expires | int >= -1
+      - item.expires >= -1
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
@@ -236,7 +236,7 @@
   assert:
     that:
       - item.password_validity_days is number
-      - item.password_validity_days | int >= -1
+      - item.password_validity_days >= -1
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
