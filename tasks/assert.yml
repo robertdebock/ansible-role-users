@@ -17,14 +17,14 @@
   assert:
     that:
       - users_cron_allow is defined
-      - users_cron_allow | type_debug == "bool"
+      - users_cron_allow is boolean
     quiet: yes
 
 - name: test if users_create_home is set correctly
   assert:
     that:
       - users_create_home is defined
-      - users_create_home | type_debug == "bool"
+      - users_create_home is boolean
     quiet: yes
 
 - name: test if users_group_list is set correctly
@@ -102,7 +102,7 @@
 - name: test if item.cron_allow in users_user_list is set correctly
   assert:
     that:
-      - item.cron_allow | type_debug == "bool"
+      - item.cron_allow is boolean
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
@@ -200,7 +200,7 @@
 - name: test if item.manage_ssh_key in users_user_list is set correctly
   assert:
     that:
-      - item.manage_ssh_key | type_debug == "bool"
+      - item.manage_ssh_key is boolean
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
