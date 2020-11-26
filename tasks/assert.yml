@@ -1,4 +1,5 @@
 ---
+
 - name: test if users_ssh_key_directory is set correctly
   assert:
     that:
