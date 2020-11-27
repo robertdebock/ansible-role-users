@@ -4,12 +4,14 @@
   assert:
     that:
       - users_ssh_key_directory is defined
+      - users_ssh_key_directory is string
     quiet: yes
 
 - name: test if users_shell is set correctly
   assert:
     that:
       - users_shell is defined
+      - users_shell is string
     quiet: yes
 
 - name: test if users_cron_allow is set correctly
@@ -38,6 +40,7 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
     quiet: yes
   loop: "{{ users_group_list }}"
   loop_control:
@@ -63,6 +66,7 @@
   assert:
     that:
       - item.state is defined
+      - item.state is string
       - item.state in [ "absent", "present" ]
     quiet: yes
   loop: "{{ users_group_list }}"
@@ -76,6 +80,7 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
