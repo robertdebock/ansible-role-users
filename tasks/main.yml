@@ -33,10 +33,12 @@
     src: cron.allow.j2
     dest: /etc/cron.allow
     mode: "0640"
-  when: users_cron_allow|bool
+  when:
+    - users_cron_allow | bool
 
 - name: check existence of /etc/cron.allow
   file:
     path: /etc/cron.allow
     state: absent
-  when: not users_cron_allow|bool
+  when:
+    - not users_cron_allow|bool
