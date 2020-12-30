@@ -6,4 +6,4 @@
     key: "{{ item }}"
   loop: "{{ user.authorized_keys }}"
   loop_control:
-    label: "{{ item | basename }}"
+    label: "{{ item.name }}"
