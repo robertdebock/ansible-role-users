@@ -24,6 +24,8 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
         - name: users
         - name: notgroup
           state: absent
+        - name: systemgroup
+          system: yes
 
       users_user_list:
         - name: root
@@ -56,6 +58,8 @@ This example is taken from `molecule/resources/converge.yml` and is tested on ea
         - name: remotekey
           authorized_keys:
             - "https://raw.githubusercontent.com/shaanr/smdb/master/file.pub"
+        - name: systemuser
+          system: yes
 ```
 
 The machine needs to be prepared in CI this is done using `molecule/resources/prepare.yml`:

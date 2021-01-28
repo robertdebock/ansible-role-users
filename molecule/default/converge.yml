@@ -12,6 +12,8 @@
         - name: users
         - name: notgroup
           state: absent
+        - name: systemgroup
+          system: yes
 
       users_user_list:
         - name: root
@@ -44,3 +46,5 @@
         - name: remotekey
           authorized_keys:
             - "https://raw.githubusercontent.com/shaanr/smdb/master/file.pub"
+        - name: systemuser
+          system: yes
