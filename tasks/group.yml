@@ -1,6 +1,6 @@
 ---
 - name: manage group {{ group.name }}
-  group:
+  ansible.builtin.group:
     name: "{{ group.name }}"
     state: "{{ group.state | default('present') }}"
     gid: "{{ group.gid | default(omit) }}"
