@@ -48,7 +48,7 @@
     label: "{{ user.name }}"
 
 - name: generate private ssh key for {{ user.name }}
-  command: "{{ users_ssh_keygen_command }}"
+  ansible.builtin.command: "{{ users_ssh_keygen_command }}"
   args:
     creates: "{{ users_ssh_key_directory }}/{{ user.name }}"
   when:
