@@ -1,6 +1,7 @@
 ---
 galaxy_info:
   author: Robert de Bock
+  namespace: robertdebock
   role_name: users
   description: The purpose of this role is to add users and groups on your system.
   license: Apache-2.0
