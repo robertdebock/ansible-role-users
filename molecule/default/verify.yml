@@ -6,14 +6,14 @@
 
   tasks:
     - name: record status of .ssh
-      stat:
+      ansible.builtin.stat:
         path: /home/keyuser/.ssh
       register: result
       failed_when:
         - not result.stat.exists
 
     - name: check if user notuser does not exist
-      user:
+      ansible.builtin.user:
         name: notuser
         state: absent
       register: users_check_user_notuser
