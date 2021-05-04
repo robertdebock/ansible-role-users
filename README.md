@@ -149,10 +149,6 @@ Apache-2.0
 
 I'd like to thank everybody that made contributions to this repository. It motivates me, improves the code and is just fun to collaborate.
 
-- [aindenko](https://github.com/aindenko)
-- [jkirk](https://github.com/jkirk)
-- [gotmax23](https://github.com/gotmax23)
-- [icklers](https://github.com/icklers)
 
 ## [Author Information](#author-information)
 
