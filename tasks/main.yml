@@ -12,7 +12,8 @@
     state: present
 
 - name: loop over users_group_list
-  ansible.builtin.include: group.yml
+  ansible.builtin.include_tasks:
+    file: group.yml
   loop: "{{ users_group_list }}"
   loop_control:
     label: "{{ group.name }}"
@@ -21,7 +22,8 @@
     - users_group_list is defined
 
 - name: loop over users_user_list
-  ansible.builtin.include: user.yml
+  ansible.builtin.include_tasks:
+    file: user.yml
   loop: "{{ users_user_list }}"
   loop_control:
     label: "{{ user.name }}"

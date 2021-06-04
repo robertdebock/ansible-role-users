@@ -97,7 +97,8 @@
     - user.manage_ssh_key
 
 - name: loop over authorized_keys for {{ user.name }}
-  ansible.builtin.include: user_authorized_key.yml
+  ansible.builtin.include_tasks:
+    file: user_authorized_key.yml
   loop: "{{ user.authorized_keys }}"
   loop_control:
     label: "{{ user.name }}"
