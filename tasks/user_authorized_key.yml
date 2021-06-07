@@ -1,6 +1,6 @@
 ---
 - name: place authorized_key for {{ user.name }}
-  authorized_key:
+  ansible.posix.authorized_key:
     user: "{{ user.name }}"
     state: present
     key: "{{ item }}"
