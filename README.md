@@ -151,6 +151,7 @@ I'd like to thank everybody that made contributions to this repository. It motiv
 
 - [aindenko](https://github.com/aindenko)
 - [jkirk](https://github.com/jkirk)
+- [markgraf](https://github.com/markgraf)
 - [gotmax23](https://github.com/gotmax23)
 - [icklers](https://github.com/icklers)
 
