@@ -48,3 +48,8 @@
             - "https://raw.githubusercontent.com/shaanr/smdb/master/file.pub"
         - name: systemuser
           system: yes
+        - name: multisudo
+          sudo_options:
+            - "ALL= NOPASSWD: /usr/bin/systemctl restart httpd"
+            - "ALL= NOPASSWD: /usr/bin/systemctl start httpd"
+            - "ALL= NOPASSWD: /usr/bin/systemctl stop httpd"

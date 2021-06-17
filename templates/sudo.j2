@@ -1,2 +1,8 @@
 {{ ansible_managed | comment }}
+{% if user.sudo_options is iterable and user.sudo_options is not string %}
+{% for sudo_option in user.sudo_options %}
+{{ user.name }} {{ sudo_option }}
+{% endfor %}
+{% else %}
 {{ user.name }} {{ user.sudo_options }}
+{% endif %}
