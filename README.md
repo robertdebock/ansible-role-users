@@ -159,6 +159,7 @@ I'd like to thank everybody that made contributions to this repository. It motiv
 - [markgraf](https://github.com/markgraf)
 - [gotmax23](https://github.com/gotmax23)
 - [icklers](https://github.com/icklers)
+- [i-mtz](https://github.com/i-mtz)
 
 ## [Author Information](#author-information)
 
