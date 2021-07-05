@@ -130,7 +130,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |---------|----|
 |alpine|all|
 |amazon|Candidate|
-|el|7, 8|
+|el|8|
 |debian|buster, bullseye|
 |fedora|all|
 |opensuse|all|
@@ -154,12 +154,6 @@ Apache-2.0
 
 I'd like to thank everybody that made contributions to this repository. It motivates me, improves the code and is just fun to collaborate.
 
-- [aindenko](https://github.com/aindenko)
-- [jkirk](https://github.com/jkirk)
-- [markgraf](https://github.com/markgraf)
-- [gotmax23](https://github.com/gotmax23)
-- [icklers](https://github.com/icklers)
-- [i-mtz](https://github.com/i-mtz)
 
 ## [Author Information](#author-information)
 
