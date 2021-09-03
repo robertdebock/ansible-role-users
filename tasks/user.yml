@@ -105,6 +105,8 @@
   loop: "{{ user.authorized_keys }}"
   loop_control:
     label: "{{ user.name }}"
+  when:
+    - user.authorized_keys is defined
 
 - name: copy generated private ssh key for {{ user.name }}
   ansible.builtin.copy:
