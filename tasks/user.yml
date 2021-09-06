@@ -97,13 +97,14 @@
     - user.manage_ssh_key is defined
     - user.manage_ssh_key
 
-- name: loop over authorized_keys for {{ user.name }}
-  ansible.builtin.include_tasks:
-    file: user_authorized_key.yml
+- name: Deploy authorized keys for {{ user.name }}
+  ansible.posix.authorized_key:
+    user: "{{ user.name }}"
+    state: present
+    key: "{{ item }}"
   loop: "{{ user.authorized_keys }}"
   loop_control:
     label: "{{ user.name }}"
-    loop_var: authorized_key
   when:
     - user.authorized_keys is defined
 

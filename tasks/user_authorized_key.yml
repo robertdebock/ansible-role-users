@@ -1,9 +1,0 @@
----
-- name: place authorized_key for {{ user.name }}
-  ansible.posix.authorized_key:
-    user: "{{ user.name }}"
-    state: present
-    key: "{{ item }}"
-  loop: "{{ user.authorized_keys }}"
-  loop_control:
-    label: "{{ user.name }}"
