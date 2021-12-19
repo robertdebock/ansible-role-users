@@ -108,6 +108,17 @@
   when:
     - user.authorized_keys is defined
 
+- name: Remove unauthorized keys for {{ user.name }}
+  ansible.posix.authorized_key:
+    user: "{{ user.name }}"
+    state: absent
+    key: "{{ item }}"
+  loop: "{{ user.unauthorized_keys }}"
+  loop_control:
+    label: "{{ user.name }}"
+  when:
+    - user.unauthorized_keys is defined
+
 - name: copy generated private ssh key for {{ user.name }}
   ansible.builtin.copy:
     src: "{{ users_ssh_key_directory }}/{{ user.name }}"
