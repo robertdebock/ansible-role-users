@@ -30,6 +30,8 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
       users_user_list:
         - name: root
           cron_allow: yes
+          unauthorized_keys:
+            - "ssh-rsa ZYX54321"
         - name: robertdb
           comment: Robert de Bock
           uid: 1024
