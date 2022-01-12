@@ -19,3 +19,12 @@
       register: users_check_user_notuser
       failed_when:
         - users_check_user_notuser is changed
+
+    - name: check if unauthorized keys are deleted
+      ansible.posix.authorized_key:
+        user: root
+        state: absent
+        key: "ssh-rsa XYZYX54321"
+      register: users_check_unauthorized_keys
+      failed_when:
+        - users_check_unauthorized_keys is changed

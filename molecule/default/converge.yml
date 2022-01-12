@@ -18,6 +18,8 @@
       users_user_list:
         - name: root
           cron_allow: yes
+          unauthorized_keys:
+            - "ssh-rsa XYZYX54321"
         - name: robertdb
           comment: Robert de Bock
           uid: 1024

@@ -7,3 +7,10 @@
   roles:
     - role: robertdebock.bootstrap
     - role: robertdebock.core_dependencies
+
+  tasks:
+    - name: Set authorized keys for root
+      ansible.posix.authorized_key:
+        user: root
+        state: present
+        key: "ssh-rsa XYZYX54321"
