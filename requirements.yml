@@ -4,4 +4,3 @@ roles:
   - name: robertdebock.core_dependencies
 collections:
   - name: ansible.posix
-  - name: community.general
