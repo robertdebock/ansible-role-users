@@ -32,7 +32,7 @@
 - name: set sudo options for {{ user.name }}
   ansible.builtin.template:
     src: sudo.j2
-    dest: '/etc/sudoers.d/{{ user.name | replace(".", "dot", 1) }}'
+    dest: '/etc/sudoers.d/{{ user.name | replace(".", "dot") }}'
     mode: "0640"
     validate: /usr/sbin/visudo -cf %s
   when:
@@ -42,7 +42,7 @@
 
 - name: remove sudo options for {{ user.name }}
   ansible.builtin.file:
-    path: '/etc/sudoers.d/{{ user.name | replace(".", "dot", 1)  }}'
+    path: '/etc/sudoers.d/{{ user.name | replace(".", "dot")  }}'
     state: absent
   when:
     - user.sudo_options is not defined
