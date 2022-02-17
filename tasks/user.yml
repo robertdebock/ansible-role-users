@@ -42,12 +42,18 @@
 
 - name: remove sudo options for {{ user.name }}
   ansible.builtin.file:
-    path: "/etc/sudoers.d/{{ user.name }}"
+    path: "/etc/sudoers.d/{{ user.name | replace(".", "dot", 1)  }}"
     state: absent
   when:
     - user.sudo_options is not defined
   loop_control:
     label: "{{ user.name }}"
+    
+- name: ensure the sudoers.d directory is checked for user sudoers files (will be put after EOF if not exists)
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    state: present 
+    line: '#includedir /etc/sudoers.d'
 
 - name: generate private ssh key for {{ user.name }}
   ansible.builtin.command:
