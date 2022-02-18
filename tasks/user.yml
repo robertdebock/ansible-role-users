@@ -48,7 +48,7 @@
     - user.sudo_options is not defined
   loop_control:
     label: "{{ user.name }}"
-    
+
 - name: ensure the sudoers.d directory is checked for user sudoers files (will be put after EOF if not exists)
   ansible.builtin.lineinfile:
     path: /etc/sudoers
