@@ -32,7 +32,7 @@
 - name: set sudo options for {{ user.name }}
   ansible.builtin.template:
     src: sudo.j2
-    dest: "/etc/sudoers.d/{{ user.name }}"
+    dest: '/etc/sudoers.d/{{ user.name | replace(".", "dot") }}'
     mode: "0640"
     validate: /usr/sbin/visudo -cf %s
   when:
@@ -42,12 +42,18 @@
 
 - name: remove sudo options for {{ user.name }}
   ansible.builtin.file:
-    path: "/etc/sudoers.d/{{ user.name }}"
+    path: '/etc/sudoers.d/{{ user.name | replace(".", "dot")  }}'
     state: absent
   when:
     - user.sudo_options is not defined
   loop_control:
     label: "{{ user.name }}"
+
+- name: ensure the sudoers.d directory is checked for user sudoers files (will be put after EOF if not exists)
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    state: present
+    line: '#includedir /etc/sudoers.d'
 
 - name: generate private ssh key for {{ user.name }}
   ansible.builtin.command:
