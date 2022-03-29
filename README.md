@@ -55,6 +55,25 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
           # The value `-1` removes the expiry time.
           expires: -1
           password_validity_days: 9
+          # Test username with dots
+        - name: robert.d.b
+          comment: Robert de Bock with dots in username
+          uid: 1025
+          # The `group` and `groups` listed here should exist.
+          group: robertdb
+          # groups: A comma separated string of groups, i.e.:
+          # groups: users,wheel
+          groups: users
+          cron_allow: yes
+          sudo_options: "ALL=(ALL) NOPASSWD: ALL"
+          # Adding an authorized key.
+          authorized_keys:
+            - "ssh-rsa ABC123"
+          # EPOCH timestamp when an account should expire.
+          # Typically a positive value like: `1641971487`.
+          # The value `-1` removes the expiry time.
+          expires: -1
+          password_validity_days: 9
         # Here a user is removed.
         - name: notuser
           state: absent
@@ -167,7 +186,6 @@ The minimum version of Ansible required is 2.10, tests have been done to:
 - The previous version.
 - The current version.
 - The development version.
-
 
 
 If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-users/issues)
