@@ -92,9 +92,15 @@
   delegate_to: localhost
   become: no
 
+- name: get system users data
+  getent:
+    database: passwd
+    key: "{{ user.name }}"
+    split: ":"
+
 - name: create .ssh directory for {{ user.name }}
   ansible.builtin.file:
-    path: "/home/{{ user.name }}/.ssh"
+    path: "{{ getent_passwd[user.name][4] }}/{{ user.name }}/.ssh"
     state: directory
     mode: "700"
   become: yes
@@ -128,7 +134,7 @@
 - name: copy generated private ssh key for {{ user.name }}
   ansible.builtin.copy:
     src: "{{ users_ssh_key_directory }}/{{ user.name }}"
-    dest: "/home/{{ user.name }}/.ssh/id_rsa"
+    dest: "{{ getent_passwd[user.name][4] }}/{{ user.name }}/.ssh/id_rsa"
     mode: "400"
     owner: "{{ user.name }}"
     group: "{{ user.group | default(omit) }}"
