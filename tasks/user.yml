@@ -96,7 +96,7 @@
   ansible.builtin.file:
     path: "/home/{{ user.name }}/.ssh"
     state: directory
-    mode: "700"
+    mode: "0700"
   become: yes
   become_user: "{{ user.name }}"
   when:
@@ -141,7 +141,7 @@
 
 - name: check users password valid time
   ansible.builtin.command:
-    cmd: awk 'BEGIN { FS = ":" } $1 == "{{ user.name }}" { print $5 }' /etc/shadow
+    cmd: "awk 'BEGIN { FS = \":\" } $1 == \"{{ user.name }}\" { print $5 }' /etc/shadow"
   register: users_pw_valid
   changed_when: no
   check_mode: no

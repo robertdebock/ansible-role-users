@@ -30,7 +30,7 @@
           uid: 1024
           # The `group` and `groups` listed here should exist.
           group: robertdb
-          # groups: A comma separated string of groups, i.e.:
+          # groups: A comma separated string of groups
           # groups: users,wheel
           groups: users
           cron_allow: yes
@@ -49,7 +49,7 @@
           uid: 1025
           # The `group` and `groups` listed here should exist.
           group: robertdb
-          # groups: A comma separated string of groups, i.e.:
+          # groups: A comma separated string of groups
           # groups: users,wheel
           groups: users
           cron_allow: yes
