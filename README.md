@@ -42,7 +42,7 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
           uid: 1024
           # The `group` and `groups` listed here should exist.
           group: robertdb
-          # groups: A comma separated string of groups, i.e.:
+          # groups: A comma separated string of groups
           # groups: users,wheel
           groups: users
           cron_allow: yes
@@ -61,7 +61,7 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
           uid: 1025
           # The `group` and `groups` listed here should exist.
           group: robertdb
-          # groups: A comma separated string of groups, i.e.:
+          # groups: A comma separated string of groups
           # groups: users,wheel
           groups: users
           cron_allow: yes
@@ -196,6 +196,6 @@ Apache-2.0
 
 ## [Author Information](#author-information)
 
-[Robert de Bock](https://robertdebock.nl/)
+[robertdebock](https://robertdebock.nl/)
 
 Please consider [sponsoring me](https://github.com/sponsors/robertdebock).
