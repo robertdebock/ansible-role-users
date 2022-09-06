@@ -1,17 +1,17 @@
 ---
 # tasks file for users
 
-- name: import assert.yml
+- name: Import assert.yml
   ansible.builtin.import_tasks: assert.yml
   run_once: yes
   delegate_to: localhost
 
-- name: install required software
+- name: Install required software
   ansible.builtin.package:
     name: "{{ users_requirements }}"
     state: present
 
-- name: loop over users_group_list
+- name: Loop over users_group_list
   ansible.builtin.include_tasks:
     file: group.yml
   loop: "{{ users_group_list }}"
@@ -21,7 +21,7 @@
   when:
     - users_group_list is defined
 
-- name: loop over users_user_list
+- name: Loop over users_user_list
   ansible.builtin.include_tasks:
     file: user.yml
   loop: "{{ users_user_list }}"
@@ -31,7 +31,7 @@
   when:
     - users_user_list is defined
 
-- name: manage cron permission
+- name: Manage cron permission
   ansible.builtin.template:
     src: cron.allow.j2
     dest: /etc/cron.allow
@@ -39,7 +39,7 @@
   when:
     - users_cron_allow | bool
 
-- name: check existence of /etc/cron.allow
+- name: Check existence of /etc/cron.allow
   ansible.builtin.file:
     path: /etc/cron.allow
     state: absent
