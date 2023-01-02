@@ -42,7 +42,7 @@
 
 - name: Remove sudo options for {{ user.name }}
   ansible.builtin.file:
-    path: '/etc/sudoers.d/{{ user.name | replace(".", "dot")  }}'
+    path: '/etc/sudoers.d/{{ user.name | replace(".", "dot") }}'
     state: absent
   when:
     - user.sudo_options is not defined
