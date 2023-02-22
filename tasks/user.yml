@@ -156,3 +156,4 @@
     - user.password_validity_days is defined
     - users_pw_valid.stdout is defined
     - users_pw_valid.stdout | int !=  user.password_validity_days | int
+  changed_when: yes
