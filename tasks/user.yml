@@ -8,7 +8,7 @@
     mode: "0750"
   when:
     - user.manage_ssh_key is defined
-    - user.manage_ssh_key | bool
+    - user.manage_ssh_key
   delegate_to: localhost
   become: no
 
@@ -61,7 +61,7 @@
     creates: "{{ users_ssh_key_directory }}/{{ user.name }}"
   when:
     - user.manage_ssh_key is defined
-    - user.manage_ssh_key | bool
+    - user.manage_ssh_key
   loop_control:
     label: "{{ user.name }}"
   delegate_to: localhost
@@ -73,7 +73,7 @@
     creates: "{{ users_ssh_key_directory }}/{{ user.name }}.pub"
   when:
     - user.manage_ssh_key is defined
-    - user.manage_ssh_key | bool
+    - user.manage_ssh_key
   loop_control:
     label: "{{ user.name }}"
   delegate_to: localhost
@@ -88,7 +88,7 @@
     creates: "{{ users_ssh_key_directory }}/{{ user.name }}.ppk"
   when:
     - user.manage_ssh_key is defined
-    - user.manage_ssh_key | bool
+    - user.manage_ssh_key
   delegate_to: localhost
   become: no
 
@@ -135,7 +135,7 @@
   when:
     - users_manage_user is defined
     - user.copy_private_key is defined
-    - user.copy_private_key | bool
+    - user.copy_private_key
   loop_control:
     label: "{{ user.name }}"
 
