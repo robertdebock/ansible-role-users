@@ -100,8 +100,8 @@
   become: yes
   become_user: "{{ user.name }}"
   when:
-    - user.manage_ssh_key is defined
-    - user.manage_ssh_key
+    - (user.manage_ssh_key is defined and user.manage_ssh_key)
+      or user.private_keys is defined
 
 - name: Deploy authorized keys for {{ user.name }}
   ansible.posix.authorized_key:
@@ -157,3 +157,16 @@
     - users_pw_valid.stdout is defined
     - users_pw_valid.stdout | int !=  user.password_validity_days | int
   changed_when: yes
+
+- name: Place private key file
+  ansible.builtin.copy:
+    content: "{{ item.content }}"
+    dest: "/home/{{ user.name }}/.ssh/{{ item.name }}"
+    mode: "400"
+    owner: "{{ user.name }}"
+    group: "{{ user.group | default(omit) }}"
+  when:
+    - user.private_keys is defined
+  loop: "{{ user.private_keys }}"
+  loop_control:
+    label: "{{ item.name }}"
