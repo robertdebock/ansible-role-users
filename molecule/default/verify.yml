@@ -5,14 +5,14 @@
   gather_facts: no
 
   tasks:
-    - name: record status of .ssh
+    - name: Record status of .ssh
       ansible.builtin.stat:
         path: /home/keyuser/.ssh
       register: result
       failed_when:
         - not result.stat.exists
 
-    - name: check if user notuser does not exist
+    - name: Check if user notuser does not exist
       ansible.builtin.user:
         name: notuser
         state: absent
@@ -20,7 +20,7 @@
       failed_when:
         - users_check_user_notuser is changed
 
-    - name: check if unauthorized keys are deleted
+    - name: Check if unauthorized keys are deleted
       ansible.posix.authorized_key:
         user: root
         state: absent
