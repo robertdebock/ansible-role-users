@@ -1,34 +1,34 @@
 ---
 
-- name: test if users_ssh_key_directory is set correctly
+- name: Test if users_ssh_key_directory is set correctly
   ansible.builtin.assert:
     that:
       - users_ssh_key_directory is defined
       - users_ssh_key_directory is string
     quiet: yes
 
-- name: test if users_shell is set correctly
+- name: Test if users_shell is set correctly
   ansible.builtin.assert:
     that:
       - users_shell is defined
       - users_shell is string
     quiet: yes
 
-- name: test if users_cron_allow is set correctly
+- name: Test if users_cron_allow is set correctly
   ansible.builtin.assert:
     that:
       - users_cron_allow is defined
       - users_cron_allow is boolean
     quiet: yes
 
-- name: test if users_create_home is set correctly
+- name: Test if users_create_home is set correctly
   ansible.builtin.assert:
     that:
       - users_create_home is defined
       - users_create_home is boolean
     quiet: yes
 
-- name: test if users_group_list is set correctly
+- name: Test if users_group_list is set correctly
   ansible.builtin.assert:
     that:
       - users_group_list is iterable
@@ -36,7 +36,7 @@
   when:
     - users_group_list is defined
 
-- name: test if item.name in users_group_list is set correctly
+- name: Test if item.name in users_group_list is set correctly
   ansible.builtin.assert:
     that:
       - item.name is defined
@@ -48,7 +48,7 @@
   when:
     - users_group_list is defined
 
-- name: test if item.gid in users_group_list is set correctly
+- name: Test if item.gid in users_group_list is set correctly
   ansible.builtin.assert:
     that:
       - item.gid is defined
@@ -62,7 +62,7 @@
     - users_group_list is defined
     - item.gid is defined
 
-- name: test if item.state in users_group_list is set correctly
+- name: Test if item.state in users_group_list is set correctly
   ansible.builtin.assert:
     that:
       - item.state is defined
@@ -76,7 +76,7 @@
     - users_group_list is defined
     - item.state is defined
 
-- name: test if item.system in users_group_list is set correctly
+- name: Test if item.system in users_group_list is set correctly
   ansible.builtin.assert:
     that:
       - item.system is boolean
@@ -88,7 +88,7 @@
     - users_group_list is defined
     - item.system is defined
 
-- name: test if item.name in users_user_list is set correctly
+- name: Test if item.name in users_user_list is set correctly
   ansible.builtin.assert:
     that:
       - item.name is defined
@@ -100,7 +100,7 @@
   when:
     - users_user_list is defined
 
-- name: test if item.cron_allow in users_user_list is set correctly
+- name: Test if item.cron_allow in users_user_list is set correctly
   ansible.builtin.assert:
     that:
       - item.cron_allow is boolean
@@ -112,7 +112,7 @@
     - users_user_list is defined
     - item.cron_allow is defined
 
-- name: test if item.uid in users_user_list is set correctly
+- name: Test if item.uid in users_user_list is set correctly
   ansible.builtin.assert:
     that:
       - item.uid is number
@@ -125,7 +125,7 @@
     - users_user_list is defined
     - item.uid is defined
 
-- name: test if item.authorized_keys in users_user_list is set correctly
+- name: Test if item.authorized_keys in users_user_list is set correctly
   ansible.builtin.assert:
     that:
       - item.authorized_keys is iterable
@@ -137,7 +137,7 @@
     - users_user_list is defined
     - item.authorized_keys is defined
 
-- name: test if item.manage_ssh_key in users_user_list is set correctly
+- name: Test if item.manage_ssh_key in users_user_list is set correctly
   ansible.builtin.assert:
     that:
       - item.manage_ssh_key is boolean
@@ -149,7 +149,7 @@
     - users_user_list is defined
     - item.manage_ssh_key is defined
 
-- name: test if item.update_password in users_user_list is set correctly
+- name: Test if item.update_password in users_user_list is set correctly
   ansible.builtin.assert:
     that:
       - item.update_password in [ "always", "on_create" ]
@@ -161,7 +161,7 @@
     - users_user_list is defined
     - item.update_password is defined
 
-- name: test if item.exipres in users_user_list is set correctly
+- name: Test if item.exipres in users_user_list is set correctly
   ansible.builtin.assert:
     that:
       - item.expires is number
@@ -174,7 +174,7 @@
     - users_user_list is defined
     - item.expires is defined
 
-- name: test if item.password_validity_days in users_user_list is set correctly
+- name: Test if item.password_validity_days in users_user_list is set correctly
   ansible.builtin.assert:
     that:
       - item.password_validity_days is number
@@ -187,7 +187,7 @@
     - users_user_list is defined
     - item.password_validity_days is defined
 
-- name: test if item.system in users_user_list is set correctly
+- name: Test if item.system in users_user_list is set correctly
   ansible.builtin.assert:
     that:
       - item.system is boolean
