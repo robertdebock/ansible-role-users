@@ -92,13 +92,13 @@
   delegate_to: localhost
   become: no
 
-- name: get system users data
-  getent:
+- name: Get system users data
+  ansible.builtin.getent:
     database: passwd
     key: "{{ user.name }}"
     split: ":"
 
-- name: create .ssh directory for {{ user.name }}
+- name: Create .ssh directory for {{ user.name }}
   ansible.builtin.file:
     path: "{{ getent_passwd[user.name][4] }}/{{ user.name }}/.ssh"
     state: directory
