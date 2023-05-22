@@ -10,7 +10,6 @@ rules:
     level: error
   line-length: disable
   truthy: disable
-  comments-indentation: disable
 
 ignore: |
   .tox/
