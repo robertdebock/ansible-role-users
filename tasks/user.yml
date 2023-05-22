@@ -91,15 +91,23 @@
   delegate_to: localhost
   become: no
 
-- name: Get system users data
-  ansible.builtin.getent:
-    database: passwd
-    key: "{{ user.name }}"
-    split: ":"
+- name: user | Get or set the home directory
+  block:
+    - name: user | Get system users data
+      ansible.builtin.getent:
+        database: passwd
+        key: "{{ user.name }}"
+        split: ":"
+  rescue:
+    - name: user | User not found, that's okay
+  always:
+    - name: user | Set home directory
+      ansible.builtin.set_fact:
+        users_home_base_dir: "{{ getent_passwd[user.name][4] | default('/home') }}"
 
 - name: user | Create .ssh directory for {{ user.name }}
   ansible.builtin.file:
-    path: "{{ getent_passwd[user.name][4] }}/{{ user.name }}/.ssh"
+    path: "{{ users_home_base_dir }}/{{ user.name }}/.ssh"
     state: directory
     mode: "0700"
   become: yes
@@ -133,7 +141,7 @@
 - name: user | Copy generated private ssh key for {{ user.name }}
   ansible.builtin.copy:
     src: "{{ users_ssh_key_directory }}/{{ user.name }}"
-    dest: "{{ getent_passwd[user.name][4] }}/{{ user.name }}/.ssh/id_rsa"
+    dest: "{{ users_home_base_dir }}/{{ user.name }}/.ssh/id_rsa"
     mode: "400"
     owner: "{{ user.name }}"
     group: "{{ user.group | default(omit) }}"
