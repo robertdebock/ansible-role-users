@@ -1,7 +1,6 @@
 ---
-# tasks file for users
 
-- name: Create local ssh_key_directory
+- name: user | Create local ssh_key_directory
   ansible.builtin.file:
     path: "{{ users_ssh_key_directory }}"
     state: directory
@@ -12,7 +11,7 @@
   delegate_to: localhost
   become: no
 
-- name: Manage users {{ user.name }}
+- name: user | Manage users {{ user.name }}
   ansible.builtin.user:
     name: "{{ user.name }}"
     state: "{{ user.state | default('present') }}"
@@ -29,7 +28,7 @@
     system: "{{ user.system | default(omit) }}"
   register: users_manage_user
 
-- name: Set sudo options for {{ user.name }}
+- name: user | Set sudo options for {{ user.name }}
   ansible.builtin.template:
     src: sudo.j2
     dest: '/etc/sudoers.d/{{ user.name | replace(".", "dot") }}'
@@ -40,7 +39,7 @@
   loop_control:
     label: "{{ user.name }}"
 
-- name: Remove sudo options for {{ user.name }}
+- name: user | Remove sudo options for {{ user.name }}
   ansible.builtin.file:
     path: '/etc/sudoers.d/{{ user.name | replace(".", "dot") }}'
     state: absent
@@ -49,13 +48,13 @@
   loop_control:
     label: "{{ user.name }}"
 
-- name: Ensure the sudoers.d directory is checked for user sudoers files (will be put after EOF if not exists)
+- name: user | Ensure the sudoers.d directory is checked for user sudoers files (will be put after EOF if not exists)
   ansible.builtin.lineinfile:
     path: /etc/sudoers
     state: present
     line: '#includedir /etc/sudoers.d'
 
-- name: Generate private ssh key for {{ user.name }}
+- name: user | Generate private ssh key for {{ user.name }}
   ansible.builtin.command:
     cmd: "{{ users_ssh_keygen_command }}"
     creates: "{{ users_ssh_key_directory }}/{{ user.name }}"
@@ -67,7 +66,7 @@
   delegate_to: localhost
   become: no
 
-- name: Generate public ssh key for {{ user.name }}
+- name: user | Generate public ssh key for {{ user.name }}
   ansible.builtin.shell:
     cmd: "{{ users_ssh_keygen_pubkey_command }} > {{ users_ssh_key_directory }}/{{ user.name }}.pub"
     creates: "{{ users_ssh_key_directory }}/{{ user.name }}.pub"
@@ -79,7 +78,7 @@
   delegate_to: localhost
   become: no
 
-- name: Convert ssh key to ppk for {{ user.name }}
+- name: user | Convert ssh key to ppk for {{ user.name }}
   ansible.builtin.shell:
     cmd: >
            ssh-keygen -e -f "{{ users_ssh_key_directory }}/{{ user.name }}"
@@ -98,7 +97,7 @@
     key: "{{ user.name }}"
     split: ":"
 
-- name: Create .ssh directory for {{ user.name }}
+- name: user | Create .ssh directory for {{ user.name }}
   ansible.builtin.file:
     path: "{{ getent_passwd[user.name][4] }}/{{ user.name }}/.ssh"
     state: directory
@@ -109,7 +108,7 @@
     - (user.manage_ssh_key is defined and user.manage_ssh_key)
       or user.private_keys is defined
 
-- name: Deploy authorized keys for {{ user.name }}
+- name: user | Deploy authorized keys for {{ user.name }}
   ansible.posix.authorized_key:
     user: "{{ user.name }}"
     state: present
@@ -120,7 +119,7 @@
   when:
     - user.authorized_keys is defined
 
-- name: Remove unauthorized keys for {{ user.name }}
+- name: user | Remove unauthorized keys for {{ user.name }}
   ansible.posix.authorized_key:
     user: "{{ user.name }}"
     state: absent
@@ -131,7 +130,7 @@
   when:
     - user.unauthorized_keys is defined
 
-- name: Copy generated private ssh key for {{ user.name }}
+- name: user | Copy generated private ssh key for {{ user.name }}
   ansible.builtin.copy:
     src: "{{ users_ssh_key_directory }}/{{ user.name }}"
     dest: "{{ getent_passwd[user.name][4] }}/{{ user.name }}/.ssh/id_rsa"
@@ -145,7 +144,7 @@
   loop_control:
     label: "{{ user.name }}"
 
-- name: Check users password valid time
+- name: user | Check users password valid time
   ansible.builtin.command:
     cmd: "awk 'BEGIN { FS = \":\" } $1 == \"{{ user.name }}\" { print $5 }' /etc/shadow"
   register: users_pw_valid
@@ -155,7 +154,7 @@
     - user.state is defined and user.state != "absent" or
       user.state is not defined
 
-- name: Set users password valid time
+- name: user | Set users password valid time
   ansible.builtin.command:
     cmd: chage -M "{{ user.password_validity_days }}" "{{ user.name }}"
   when:
@@ -164,7 +163,7 @@
     - users_pw_valid.stdout | int !=  user.password_validity_days | int
   changed_when: yes
 
-- name: Place private key file
+- name: user | Place private key file
   ansible.builtin.copy:
     content: "{{ item.content }}"
     dest: "/home/{{ user.name }}/.ssh/{{ item.name }}"
