@@ -10,16 +10,16 @@
         - name: Get system users data
           ansible.builtin.getent:
             database: passwd
-            key: "{{ user.name }}"
+            key: keyuser
             split: ":"
       rescue:
         - name: User not found, that's okay
           ansible.builtin.debug:
             msg: "No user found, that is okay."
       always:
-        - name: Set home directory to {{ getent_passwd[user.name][4] | default('/home') }}
+        - name: Set home directory to {{ getent_passwd['keyuser'][4] | default('/home') }}
           ansible.builtin.set_fact:
-            users_home_base_dir: "{{ getent_passwd[user.name][4] | default('/home') }}"
+            users_home_base_dir: "{{ getent_passwd['keyuser'][4] | default('/home') }}"
 
     - name: Record status of .ssh
       ansible.builtin.stat:
