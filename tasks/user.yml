@@ -1,4 +1,5 @@
 ---
+
 - name: user | Create local ssh_key_directory
   ansible.builtin.file:
     path: "{{ users_ssh_key_directory }}"
@@ -102,7 +103,7 @@
       ansible.builtin.debug:
         msg: "No user found, that is okay."
   always:
-    - name: user | Set home directory
+    - name: user | Set home directory to {{ getent_passwd[user.name][4] | default('/home') }}
       ansible.builtin.set_fact:
         users_home_base_dir: "{{ getent_passwd[user.name][4] | default('/home') }}"
 
