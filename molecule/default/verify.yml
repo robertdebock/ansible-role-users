@@ -5,19 +5,19 @@
   gather_facts: no
 
   tasks:
-    - name: user | Get or set the home directory
+    - name: Get or set the home directory
       block:
-        - name: user | Get system users data
+        - name: Get system users data
           ansible.builtin.getent:
             database: passwd
             key: "{{ user.name }}"
             split: ":"
       rescue:
-        - name: user | User not found, that's okay
+        - name: User not found, that's okay
           ansible.builtin.debug:
             msg: "No user found, that is okay."
       always:
-        - name: user | Set home directory to {{ getent_passwd[user.name][4] | default('/home') }}
+        - name: Set home directory to {{ getent_passwd[user.name][4] | default('/home') }}
           ansible.builtin.set_fact:
             users_home_base_dir: "{{ getent_passwd[user.name][4] | default('/home') }}"
 
