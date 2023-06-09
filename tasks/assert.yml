@@ -5,6 +5,7 @@
     that:
       - users_ssh_key_directory is defined
       - users_ssh_key_directory is string
+      - users_ssh_key_directory is not none
     quiet: yes
 
 - name: assert | Test if users_shell is set correctly
@@ -12,6 +13,7 @@
     that:
       - users_shell is defined
       - users_shell is string
+      - users_shell is not none
     quiet: yes
 
 - name: assert | Test if users_cron_allow is set correctly
@@ -41,6 +43,7 @@
     that:
       - item.name is defined
       - item.name is string
+      - item.name is not none
     quiet: yes
   loop: "{{ users_group_list }}"
   loop_control:
@@ -93,6 +96,7 @@
     that:
       - item.name is defined
       - item.name is string
+      - item.name is not none
     quiet: yes
   loop: "{{ users_user_list }}"
   loop_control:
