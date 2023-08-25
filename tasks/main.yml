@@ -11,25 +11,25 @@
     name: "{{ users_requirements }}"
     state: present
 
-- name: Loop over users_group_list
+- name: Loop over users_groups
   ansible.builtin.include_tasks:
     file: group.yml
-  loop: "{{ users_group_list }}"
+  loop: "{{ users_groups }}"
   loop_control:
     label: "{{ group.name }}"
     loop_var: group
   when:
-    - users_group_list is defined
+    - users_groups is defined
 
-- name: Loop over users_user_list
+- name: Loop over users
   ansible.builtin.include_tasks:
     file: user.yml
-  loop: "{{ users_user_list }}"
+  loop: "{{ users }}"
   loop_control:
     label: "{{ user.name }}"
     loop_var: user
   when:
-    - users_user_list is defined
+    - users is defined
 
 - name: Manage cron permission
   ansible.builtin.template:

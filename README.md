@@ -20,7 +20,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
   roles:
     - role: robertdebock.users
       # You can create groups:
-      users_group_list:
+      users_groups:
         - name: robertdb
           gid: 1024
         - name: users
@@ -32,7 +32,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
           system: yes
 
       # You can create users.
-      users_user_list:
+      users:
         - name: root
           cron_allow: yes
           # You can remove authorized keys.
@@ -43,9 +43,12 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
           uid: 1024
           # The `group` and `groups` listed here should exist.
           group: robertdb
-          # groups: A comma separated string of groups
-          # groups: users,wheel
-          groups: users
+          # groups: A list of groups
+          # groups:
+          #   - users
+          #   - wheel
+          groups:
+            - users
           cron_allow: yes
           sudo_options: "ALL=(ALL) NOPASSWD: ALL"
           # Adding an authorized key.
@@ -62,11 +65,15 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
           uid: 1025
           # The `group` and `groups` listed here should exist.
           group: robertdb
-          # groups: A comma separated string of groups
-          # groups: users,wheel
-          groups: users
+          # groups: A list of groups
+          # groups:
+          #   - users
+          #   - wheel
+          groups:
+            - users
           cron_allow: yes
-          sudo_options: "ALL=(ALL) NOPASSWD: ALL"
+          # Allow sudo, but require a password.
+          sudo_options: "ALL=(ALL) ALL"
           # Adding an authorized key.
           authorized_keys:
             - "ssh-rsa ABC123"

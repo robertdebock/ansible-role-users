@@ -1,6 +1,6 @@
 {{ ansible_managed | comment }}
-{% if users_user_list is defined %}
-{% for user in users_user_list %}
+{% if userss is defined %}
+{% for user in users %}
 {% if user.cron_allow is defined %}
 {% if user.cron_allow %}
 {{ user.name }}

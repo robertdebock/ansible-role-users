@@ -11,7 +11,7 @@
   delegate_to: localhost
   become: no
 
-- name: user | Manage users {{ user.name }}
+- name: user | Manage user {{ user.name }}
   ansible.builtin.user:
     name: "{{ user.name }}"
     state: "{{ user.state | default('present') }}"
@@ -20,7 +20,8 @@
     password: "{{ user.password | default(omit) }}"
     uid: "{{ user.uid | default(omit) }}"
     group: "{{ user.group | default(omit) }}"
-    groups: "{{ user.groups | default(omit) }}"
+    # groups: "{{ user.groups | join(',') | default(omit) }}"  # <- Join and Omit do not work together.
+    groups: "{{ user.groups | default([]) | join(',') or omit }}"
     home: "{{ user.home | default(omit) }}"
     shell: "{{ user.shell | default(users_shell) }}"
     update_password: "{{ user.update_password | default(omit) }}"
@@ -85,9 +86,9 @@
   delegate_to: localhost
   become: no
 
-- name: user | Get or set the home directory
+- name: user | Get or set the home directory for {{ user.name }}
   block:
-    - name: user | Get system users data
+    - name: user | Get system users data for {{ user.name }}
       ansible.builtin.getent:
         database: passwd
         key: "{{ user.name }}"
@@ -148,7 +149,7 @@
   loop_control:
     label: "{{ user.name }}"
 
-- name: user | Check users password valid time
+- name: user | Check users password valid time for {{ user.name }}
   ansible.builtin.command:
     cmd: 'awk ''BEGIN { FS = ":" } $1 == "{{ user.name }}" { print $5 }'' /etc/shadow'
   register: users_pw_valid
@@ -158,7 +159,7 @@
     - user.state is defined and user.state != "absent" or
       user.state is not defined
 
-- name: user | Set users password valid time
+- name: user | Set users password valid time for {{ user.name }}
   ansible.builtin.command:
     cmd: chage -M "{{ user.password_validity_days }}" "{{ user.name }}"
   when:
@@ -167,7 +168,7 @@
     - users_pw_valid.stdout | int !=  user.password_validity_days | int
   changed_when: yes
 
-- name: user | Place private key file
+- name: user | Place private key file for {{ user.name }}
   ansible.builtin.copy:
     content: "{{ item.content }}"
     dest: "{{ users_home_base_dir }}/{{ user.name }}/.ssh/{{ item.name }}"

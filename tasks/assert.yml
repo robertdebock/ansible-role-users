@@ -30,175 +30,175 @@
       - users_create_home is boolean
     quiet: yes
 
-- name: assert | Test if users_group_list is set correctly
+- name: assert | Test if users_groups is set correctly
   ansible.builtin.assert:
     that:
-      - users_group_list is iterable
+      - users_groups is iterable
     quiet: yes
   when:
-    - users_group_list is defined
+    - users_groups is defined
 
-- name: assert | Test if item.name in users_group_list is set correctly
+- name: assert | Test if item.name in users_groups is set correctly
   ansible.builtin.assert:
     that:
       - item.name is defined
       - item.name is string
       - item.name is not none
     quiet: yes
-  loop: "{{ users_group_list }}"
+  loop: "{{ users_groups }}"
   loop_control:
     label: "{{ item.name }}"
   when:
-    - users_group_list is defined
+    - users_groups is defined
 
-- name: assert | Test if item.gid in users_group_list is set correctly
+- name: assert | Test if item.gid in users_groups is set correctly
   ansible.builtin.assert:
     that:
       - item.gid is defined
       - item.gid is number
       - item.gid > 0
     quiet: yes
-  loop: "{{ users_group_list }}"
+  loop: "{{ users_groups }}"
   loop_control:
     label: "{{ item.name }}"
   when:
-    - users_group_list is defined
+    - users_groups is defined
     - item.gid is defined
 
-- name: assert | Test if item.state in users_group_list is set correctly
+- name: assert | Test if item.state in users_groups is set correctly
   ansible.builtin.assert:
     that:
       - item.state is defined
       - item.state is string
       - item.state in [ "absent", "present" ]
     quiet: yes
-  loop: "{{ users_group_list }}"
+  loop: "{{ users_groups }}"
   loop_control:
     label: "{{ item.name }}"
   when:
-    - users_group_list is defined
+    - users_groups is defined
     - item.state is defined
 
-- name: assert | Test if item.system in users_group_list is set correctly
+- name: assert | Test if item.system in users_groups is set correctly
   ansible.builtin.assert:
     that:
       - item.system is boolean
     quiet: yes
-  loop: "{{ users_group_list }}"
+  loop: "{{ users_groups }}"
   loop_control:
     label: "{{ item.name }}"
   when:
-    - users_group_list is defined
+    - users_groups is defined
     - item.system is defined
 
-- name: assert | Test if item.name in users_user_list is set correctly
+- name: assert | Test if item.name in users is set correctly
   ansible.builtin.assert:
     that:
       - item.name is defined
       - item.name is string
       - item.name is not none
     quiet: yes
-  loop: "{{ users_user_list }}"
+  loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
   when:
-    - users_user_list is defined
+    - users is defined
 
-- name: assert | Test if item.cron_allow in users_user_list is set correctly
+- name: assert | Test if item.cron_allow in users is set correctly
   ansible.builtin.assert:
     that:
       - item.cron_allow is boolean
     quiet: yes
-  loop: "{{ users_user_list }}"
+  loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
   when:
-    - users_user_list is defined
+    - users is defined
     - item.cron_allow is defined
 
-- name: assert | Test if item.uid in users_user_list is set correctly
+- name: assert | Test if item.uid in users is set correctly
   ansible.builtin.assert:
     that:
       - item.uid is number
       - item.uid >= 0
     quiet: yes
-  loop: "{{ users_user_list }}"
+  loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
   when:
-    - users_user_list is defined
+    - users is defined
     - item.uid is defined
 
-- name: assert | Test if item.authorized_keys in users_user_list is set correctly
+- name: assert | Test if item.authorized_keys in users is set correctly
   ansible.builtin.assert:
     that:
       - item.authorized_keys is iterable
     quiet: yes
-  loop: "{{ users_user_list }}"
+  loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
   when:
-    - users_user_list is defined
+    - users is defined
     - item.authorized_keys is defined
 
-- name: assert | Test if item.manage_ssh_key in users_user_list is set correctly
+- name: assert | Test if item.manage_ssh_key in users is set correctly
   ansible.builtin.assert:
     that:
       - item.manage_ssh_key is boolean
     quiet: yes
-  loop: "{{ users_user_list }}"
+  loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
   when:
-    - users_user_list is defined
+    - users is defined
     - item.manage_ssh_key is defined
 
-- name: assert | Test if item.update_password in users_user_list is set correctly
+- name: assert | Test if item.update_password in users is set correctly
   ansible.builtin.assert:
     that:
       - item.update_password in [ "always", "on_create" ]
     quiet: yes
-  loop: "{{ users_user_list }}"
+  loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
   when:
-    - users_user_list is defined
+    - users is defined
     - item.update_password is defined
 
-- name: assert | Test if item.exipres in users_user_list is set correctly
+- name: assert | Test if item.exipres in users is set correctly
   ansible.builtin.assert:
     that:
       - item.expires is number
       - item.expires >= -1
     quiet: yes
-  loop: "{{ users_user_list }}"
+  loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
   when:
-    - users_user_list is defined
+    - users is defined
     - item.expires is defined
 
-- name: assert | Test if item.password_validity_days in users_user_list is set correctly
+- name: assert | Test if item.password_validity_days in users is set correctly
   ansible.builtin.assert:
     that:
       - item.password_validity_days is number
       - item.password_validity_days >= -1
     quiet: yes
-  loop: "{{ users_user_list }}"
+  loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
   when:
-    - users_user_list is defined
+    - users is defined
     - item.password_validity_days is defined
 
-- name: assert | Test if item.system in users_user_list is set correctly
+- name: assert | Test if item.system in users is set correctly
   ansible.builtin.assert:
     that:
       - item.system is boolean
     quiet: yes
-  loop: "{{ users_user_list }}"
+  loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
   when:
-    - users_user_list is defined
+    - users is defined
     - item.system is defined
