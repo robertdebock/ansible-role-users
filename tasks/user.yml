@@ -1,6 +1,6 @@
 ---
 
-- name: user | Create local ssh_key_directory
+- name: user | Create local ssh_key_directory for {{ user.name }}
   ansible.builtin.file:
     path: "{{ users_ssh_key_directory }}"
     state: directory
@@ -20,7 +20,6 @@
     password: "{{ user.password | default(omit) }}"
     uid: "{{ user.uid | default(omit) }}"
     group: "{{ user.group | default(omit) }}"
-    # groups: "{{ user.groups | join(',') | default(omit) }}"  # <- Join and Omit do not work together.
     groups: "{{ user.groups | default([]) | join(',') or omit }}"
     home: "{{ user.home | default(omit) }}"
     shell: "{{ user.shell | default(users_shell) }}"
