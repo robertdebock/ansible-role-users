@@ -21,6 +21,13 @@
   when:
     - users_groups is defined
 
+- name: Ensure the /etc/sudoers.d directory is included
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    line: "{{ users_sudo_includedir }}"
+    regexp: "^(@|#)includedir"
+    validate: "visudo --check --file %s"
+
 - name: Loop over users
   ansible.builtin.include_tasks:
     file: user.yml
@@ -45,9 +52,3 @@
     state: absent
   when:
     - not users_cron_allow
-
-- name: Ensure the sudoers.d directory is checked for user sudoers files (will be put after EOF if not exists)
-  ansible.builtin.lineinfile:
-    path: /etc/sudoers
-    state: present
-    line: "@includedir /etc/sudoers.d"
