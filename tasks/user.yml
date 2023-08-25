@@ -34,7 +34,7 @@
     src: sudo.j2
     dest: '/etc/sudoers.d/{{ user.name | replace(".", "dot") }}'
     mode: "0640"
-    validate: /usr/sbin/visudo -cf %s
+    validate: /usr/sbin/visudo --check --file %s
   when:
     - user.sudo_options is defined
   loop_control:
