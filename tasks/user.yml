@@ -48,12 +48,6 @@
   loop_control:
     label: "{{ user.name }}"
 
-- name: user | Ensure the sudoers.d directory is checked for user sudoers files (will be put after EOF if not exists)
-  ansible.builtin.lineinfile:
-    path: /etc/sudoers
-    state: present
-    line: "#includedir /etc/sudoers.d"
-
 - name: user | Generate private ssh key for {{ user.name }}
   ansible.builtin.command:
     cmd: "{{ users_ssh_keygen_command }}"

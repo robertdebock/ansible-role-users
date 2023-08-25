@@ -45,3 +45,9 @@
     state: absent
   when:
     - not users_cron_allow
+
+- name: Ensure the sudoers.d directory is checked for user sudoers files (will be put after EOF if not exists)
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    state: present
+    line: "@includedir /etc/sudoers.d"
