@@ -6,3 +6,14 @@
     state: "{{ group.state | default('present') }}"
     gid: "{{ group.gid | default(omit) }}"
     system: "{{ group.system | default(omit) }}"
+
+- name: group | Set sudo options for group {{ group.name }}
+  ansible.builtin.template:
+    src: sudo_group.j2
+    dest: '/etc/sudoers.d/{{ group.name | replace(".", "dot") }}'
+    mode: "0640"
+    validate: /usr/sbin/visudo -cf %s
+  when:
+    - group.sudo_options is defined
+  loop_control:
+    label: "{{ group.name }}"
