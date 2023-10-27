@@ -18,6 +18,7 @@
     comment: "{{ user.comment | default(omit) }}"
     create_home: "{{ users_create_home }}"
     password: "{{ user.password | default(omit) }}"
+    password_lock: "{{ user.password_lock | default(omit) }}"
     uid: "{{ user.uid | default(omit) }}"
     group: "{{ user.group | default(omit) }}"
     groups: "{{ user.groups | default([]) | join(',') or omit }}"
