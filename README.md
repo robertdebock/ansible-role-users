@@ -85,6 +85,9 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         # Here a user is removed.
         - name: notuser
           state: absent
+        # Here a users password is locked.
+        - name: lockeduser
+          password_lock: true  # 'false' to unlock again.
         - name: keyuser
           manage_ssh_key: yes
         - name: privkeyuser
