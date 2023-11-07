@@ -22,4 +22,5 @@ _users_sudo_includedir:
     bionic: "#includedir /etc/sudoers.d"
   RedHat:
     "8": "#includedir /etc/sudoers.d"
+    "7": "#includedir /etc/sudoers.d"
 users_sudo_includedir: "{{ _users_sudo_includedir[ansible_os_family][ansible_distribution_release] | default(_users_sudo_includedir[ansible_os_family][ansible_distribution_major_version] | default(_users_sudo_includedir['default'])) }}"
