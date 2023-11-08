@@ -17,6 +17,7 @@ users_ssh_keygen_pubkey_command: ssh-keygen -y -f {{ users_ssh_key_directory }}/
 # more recent versions of sudo use "@includedir".
 _users_sudo_includedir:
   default: "@includedir /etc/sudoers.d"
+  Amazon: "#includedir /etc/sudoers.d"
   Debian:
     focal: "#includedir /etc/sudoers.d"
     bionic: "#includedir /etc/sudoers.d"
