@@ -2,9 +2,9 @@
 
 The purpose of this role is to add users and groups on your system.
 
-|GitHub|GitLab|Quality|Downloads|Version|
-|------|------|-------|---------|-------|
-|[![github](https://github.com/robertdebock/ansible-role-users/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-users/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-users/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-users)|[![quality](https://img.shields.io/ansible/quality/29201)](https://galaxy.ansible.com/robertdebock/users)|[![downloads](https://img.shields.io/ansible/role/d/29201)](https://galaxy.ansible.com/robertdebock/users)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-users.svg)](https://github.com/robertdebock/ansible-role-users/releases/)|
+|GitHub|GitLab|Downloads|Version|
+|------|------|---------|-------|
+|[![github](https://github.com/robertdebock/ansible-role-users/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-users/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-users/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-users)|[![downloads](https://img.shields.io/ansible/role/d/24621)](https://galaxy.ansible.com/robertdebock/users)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-users.svg)](https://github.com/robertdebock/ansible-role-users/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -85,9 +85,6 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         # Here a user is removed.
         - name: notuser
           state: absent
-        # Here a users password is locked.
-        - name: lockeduser
-          password_lock: true  # 'false' to unlock again.
         - name: keyuser
           manage_ssh_key: yes
         - name: privkeyuser
@@ -243,7 +240,7 @@ The minimum version of Ansible required is 2.12, tests have been done to:
 - The current version.
 - The development version.
 
-If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-users/issues)
+If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-users/issues).
 
 ## [License](#license)
 
