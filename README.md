@@ -1,4 +1,4 @@
-# Ansible role [users](#users)
+# [Ansible role users](#users)
 
 The purpose of this role is to add users and groups on your system.
 
