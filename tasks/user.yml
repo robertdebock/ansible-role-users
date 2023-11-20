@@ -172,7 +172,7 @@
 - name: user | Place private key file for {{ user.name }}
   ansible.builtin.copy:
     content: "{{ item.content }}"
-    dest: "{{ users_home_base_dir }}/{{ user.name }}.ssh/{{ item.name }}"
+    dest: "{{ users_home_base_dir }}/{{ user.name }}/.ssh/{{ item.name }}"
     mode: "400"
     owner: "{{ user.name }}"
     group: "{{ user.group | default(omit) }}"
