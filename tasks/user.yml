@@ -105,7 +105,7 @@
 
 - name: user | Create .ssh directory for {{ user.name }}
   ansible.builtin.file:
-    path: "{{ users_home_base_dir }}/{{ user.name }}/.ssh"
+    path: "{{ users_home_base_dir }/.ssh"
     state: directory
     mode: "0700"
   become: yes
