@@ -93,14 +93,15 @@
         database: passwd
         key: "{{ user.name }}"
         split: ":"
-  rescue:
-    - name: user | User not found, that's okay
-      ansible.builtin.debug:
-        msg: "No user found, that is okay."
-  always:
-    - name: user | Set home directory to {{ getent_passwd[user.name][4] | default('/home') }}
+
+    - name: user | Set base home directory to {{ getent_passwd[user.name][4] | dirname }}
       ansible.builtin.set_fact:
-        users_home_base_dir: "{{ getent_passwd[user.name][4] | default('/home') }}"
+        users_home_base_dir: "{{ getent_passwd[user.name][4] | dirname }}"
+
+  rescue:
+    - name: user | User not found, using /home
+      ansible.builtin.set_fact:
+        users_home_base_dir: "/home"
 
 - name: user | Create .ssh directory for {{ user.name }}
   ansible.builtin.file:
@@ -171,7 +172,7 @@
 - name: user | Place private key file for {{ user.name }}
   ansible.builtin.copy:
     content: "{{ item.content }}"
-    dest: "{{ users_home_base_dir }}/.ssh/{{ item.name }}"
+    dest: "{{ users_home_base_dir }}/{{ user.name }}.ssh/{{ item.name }}"
     mode: "400"
     owner: "{{ user.name }}"
     group: "{{ user.group | default(omit) }}"
