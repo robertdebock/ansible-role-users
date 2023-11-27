@@ -21,6 +21,7 @@ _users_sudo_includedir:
   Debian:
     focal: "#includedir /etc/sudoers.d"
     bionic: "#includedir /etc/sudoers.d"
+    buster: "#includedir /etc/sudoers.d"
   RedHat:
     "8": "#includedir /etc/sudoers.d"
     "7": "#includedir /etc/sudoers.d"
