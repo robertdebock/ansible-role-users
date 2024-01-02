@@ -4,7 +4,7 @@ The purpose of this role is to add users and groups on your system.
 
 |GitHub|GitLab|Downloads|Version|
 |------|------|---------|-------|
-|[![github](https://github.com/robertdebock/ansible-role-users/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-users/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-users/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-users)|[![downloads](https://img.shields.io/ansible/role/d/24621)](https://galaxy.ansible.com/robertdebock/users)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-users.svg)](https://github.com/robertdebock/ansible-role-users/releases/)|
+|[![github](https://github.com/robertdebock/ansible-role-users/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-users/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-users/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-users)|[![downloads](https://img.shields.io/ansible/role/d/robertdebock/users)](https://galaxy.ansible.com/robertdebock/users)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-users.svg)](https://github.com/robertdebock/ansible-role-users/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
