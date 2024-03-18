@@ -1,8 +1,8 @@
 ---
 - name: Converge
   hosts: all
-  become: yes
-  gather_facts: yes
+  become: true
+  gather_facts: true
 
   roles:
     - role: ansible-role-users
@@ -16,12 +16,12 @@
           state: absent
           # A system group is also possible.
         - name: systemgroup
-          system: yes
+          system: true
 
       # You can create users.
       users:
         - name: root
-          cron_allow: yes
+          cron_allow: true
           # You can remove authorized keys.
           unauthorized_keys:
             - "ssh-rsa XYZYX54321"
@@ -36,7 +36,7 @@
           #   - wheel
           groups:
             - users
-          cron_allow: yes
+          cron_allow: true
           sudo_options: "ALL=(ALL) NOPASSWD: ALL"
           # Adding an authorized key.
           authorized_keys:
@@ -58,7 +58,7 @@
           #   - wheel
           groups:
             - users
-          cron_allow: yes
+          cron_allow: true
           # Allow sudo, but require a password.
           sudo_options: "ALL=(ALL) ALL"
           # Adding an authorized key.
@@ -73,11 +73,11 @@
         - name: notuser
           state: absent
         - name: keyuser
-          manage_ssh_key: yes
+          manage_ssh_key: true
         - name: privkeyuser
           # This user will have ssh-keys generated.
-          manage_ssh_key: yes
-          copy_private_key: yes
+          manage_ssh_key: true
+          copy_private_key: true
         - name: multiplekeys
           authorized_keys:
             - "ssh-rsa ABC1234"
@@ -91,7 +91,7 @@
             # You can also download a public key from a URL.
             - "https://raw.githubusercontent.com/shaanr/smdb/master/file.pub"
         - name: systemuser
-          system: yes
+          system: true
         - name: multisudo
           # An account that can run just a few commands without a password.
           sudo_options:

@@ -8,7 +8,7 @@ users_ssh_key_directory: ssh_keys
 users_shell: /bin/bash
 
 # manage cron permissions via /etc/cron.allow
-users_cron_allow: yes
+users_cron_allow: true
 
 # should homedirectories be created?
-users_create_home: yes
+users_create_home: true

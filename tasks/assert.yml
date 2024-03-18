@@ -6,7 +6,7 @@
       - users_ssh_key_directory is defined
       - users_ssh_key_directory is string
       - users_ssh_key_directory is not none
-    quiet: yes
+    quiet: true
 
 - name: assert | Test users_shell
   ansible.builtin.assert:
@@ -14,27 +14,27 @@
       - users_shell is defined
       - users_shell is string
       - users_shell is not none
-    quiet: yes
+    quiet: true
 
 - name: assert | Test users_cron_allow
   ansible.builtin.assert:
     that:
       - users_cron_allow is defined
       - users_cron_allow is boolean
-    quiet: yes
+    quiet: true
 
 - name: assert | Test users_create_home
   ansible.builtin.assert:
     that:
       - users_create_home is defined
       - users_create_home is boolean
-    quiet: yes
+    quiet: true
 
 - name: assert | Test users_groups
   ansible.builtin.assert:
     that:
       - users_groups is iterable
-    quiet: yes
+    quiet: true
   when:
     - users_groups is defined
 
@@ -44,7 +44,7 @@
       - item.name is defined
       - item.name is string
       - item.name is not none
-    quiet: yes
+    quiet: true
   loop: "{{ users_groups }}"
   loop_control:
     label: "{{ item.name }}"
@@ -57,7 +57,7 @@
       - item.gid is defined
       - item.gid is number
       - item.gid > 0
-    quiet: yes
+    quiet: true
   loop: "{{ users_groups }}"
   loop_control:
     label: "{{ item.name }}"
@@ -71,7 +71,7 @@
       - item.state is defined
       - item.state is string
       - item.state in [ "absent", "present" ]
-    quiet: yes
+    quiet: true
   loop: "{{ users_groups }}"
   loop_control:
     label: "{{ item.name }}"
@@ -83,7 +83,7 @@
   ansible.builtin.assert:
     that:
       - item.system is boolean
-    quiet: yes
+    quiet: true
   loop: "{{ users_groups }}"
   loop_control:
     label: "{{ item.name }}"
@@ -97,7 +97,7 @@
       - item.name is defined
       - item.name is string
       - item.name is not none
-    quiet: yes
+    quiet: true
   loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
@@ -108,7 +108,7 @@
   ansible.builtin.assert:
     that:
       - item.cron_allow is boolean
-    quiet: yes
+    quiet: true
   loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
@@ -121,7 +121,7 @@
     that:
       - item.uid is number
       - item.uid >= 0
-    quiet: yes
+    quiet: true
   loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
@@ -133,7 +133,7 @@
   ansible.builtin.assert:
     that:
       - item.authorized_keys is iterable
-    quiet: yes
+    quiet: true
   loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
@@ -145,7 +145,7 @@
   ansible.builtin.assert:
     that:
       - item.manage_ssh_key is boolean
-    quiet: yes
+    quiet: true
   loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
@@ -157,7 +157,7 @@
   ansible.builtin.assert:
     that:
       - item.update_password in [ "always", "on_create" ]
-    quiet: yes
+    quiet: true
   loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
@@ -170,7 +170,7 @@
     that:
       - item.expires is number
       - item.expires >= -1
-    quiet: yes
+    quiet: true
   loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
@@ -183,7 +183,7 @@
     that:
       - item.password_validity_days is number
       - item.password_validity_days >= -1
-    quiet: yes
+    quiet: true
   loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"
@@ -195,7 +195,7 @@
   ansible.builtin.assert:
     that:
       - item.system is boolean
-    quiet: yes
+    quiet: true
   loop: "{{ users }}"
   loop_control:
     label: "{{ item.name }}"

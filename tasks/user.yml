@@ -9,7 +9,7 @@
     - user.manage_ssh_key is defined
     - user.manage_ssh_key
   delegate_to: localhost
-  become: no
+  become: false
 
 - name: user | Manage user {{ user.name }}
   ansible.builtin.user:
@@ -59,7 +59,7 @@
   loop_control:
     label: "{{ user.name }}"
   delegate_to: localhost
-  become: no
+  become: false
 
 - name: user | Generate public ssh key for {{ user.name }}
   ansible.builtin.shell:
@@ -71,7 +71,7 @@
   loop_control:
     label: "{{ user.name }}"
   delegate_to: localhost
-  become: no
+  become: false
 
 - name: user | Convert ssh key to ppk for {{ user.name }}
   ansible.builtin.shell:
@@ -84,7 +84,7 @@
     - user.manage_ssh_key is defined
     - user.manage_ssh_key
   delegate_to: localhost
-  become: no
+  become: false
 
 - name: user | Get or set the home directory for {{ user.name }}
   block:
@@ -108,7 +108,7 @@
     path: "{{ users_home_base_dir }}/{{ user.name }}/.ssh"
     state: directory
     mode: "0700"
-  become: yes
+  become: true
   become_user: "{{ user.name }}"
   when:
     - (user.manage_ssh_key is defined and user.manage_ssh_key)
@@ -154,8 +154,8 @@
   ansible.builtin.command:
     cmd: 'awk ''BEGIN { FS = ":" } $1 == "{{ user.name }}" { print $5 }'' /etc/shadow'
   register: users_pw_valid
-  changed_when: no
-  check_mode: no
+  changed_when: false
+  check_mode: false
   when:
     - user.state is defined and user.state != "absent" or
       user.state is not defined
@@ -167,7 +167,7 @@
     - user.password_validity_days is defined
     - users_pw_valid.stdout is defined
     - users_pw_valid.stdout | int !=  user.password_validity_days | int
-  changed_when: yes
+  changed_when: true
 
 - name: user | Place private key file for {{ user.name }}
   ansible.builtin.copy:
