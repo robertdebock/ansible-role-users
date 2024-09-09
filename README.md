@@ -38,6 +38,11 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
           # You can remove authorized keys.
           unauthorized_keys:
             - "ssh-rsa XYZYX54321"
+        - name: exclusive
+          # This key will be exclusive
+          authorized_keys:
+            - "ssh-rsa XYZYX54321"
+          exclusive_keys: true
         - name: robertdb
           comment: Robert de Bock
           uid: 1024
