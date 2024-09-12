@@ -36,9 +36,6 @@ molecule:
       - image: "fedora"
         tag: "latest"
         python: ['python:3.9', 'python:3.10']
-      - image: "fedora"
-        tag: "rawhide"
-        python: ['python:3.9', 'python:3.10']
       - image: "ubuntu"
         tag: "latest"
         python: ['python:3.9', 'python:3.10']
