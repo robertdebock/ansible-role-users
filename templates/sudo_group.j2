@@ -4,5 +4,5 @@
 %{{ group.name }} {{ sudo_option }}
 {% endfor %}
 {% else %}
-{{ group.sudo_options }}
+%{{ group.name }} {{ group.sudo_options }}
 {% endif %}
