@@ -5,30 +5,6 @@
   gather_facts: false
 
   tasks:
-    - name: Get or set the home directory for {{ user.name }}
-      block:
-        - name: Get system users data for {{ user.name }}
-          ansible.builtin.getent:
-            database: passwd
-            key: "{{ user.name }}"
-            split: ":"
-
-        - name: Set base home directory to {{ getent_passwd[user.name][4] | dirname }}
-          ansible.builtin.set_fact:
-            users_home_base_dir: "{{ getent_passwd[user.name][4] | dirname }}"
-
-      rescue:
-        - name: User not found, using /home
-          ansible.builtin.set_fact:
-            users_home_base_dir: "/home"
-
-    - name: Record status of .ssh
-      ansible.builtin.stat:
-        path: "{{ users_home_base_dir }}/keyuser/.ssh"
-      register: result
-      failed_when:
-        - not result.stat.exists
-
     - name: Check if user notuser does not exist
       ansible.builtin.user:
         name: notuser
