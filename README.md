@@ -18,7 +18,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
   gather_facts: true
 
   roles:
-    - role: ansible-role-users
+    - role: robertdebock.users
       # You can create groups:
       users_groups:
         - name: robertdb
