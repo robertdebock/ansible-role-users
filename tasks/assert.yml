@@ -165,7 +165,7 @@
     - users is defined
     - item.update_password is defined
 
-- name: assert | Test item.exipres in users
+- name: assert | Test item.expires in users
   ansible.builtin.assert:
     that:
       - item.expires is number
