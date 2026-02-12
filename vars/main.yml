@@ -19,8 +19,10 @@ _users_sudo_includedir:
   default: "@includedir /etc/sudoers.d"
   Amazon: "#includedir /etc/sudoers.d"
   Debian:
+    xenial: "#includedir /etc/sudoers.d"
     focal: "#includedir /etc/sudoers.d"
     bionic: "#includedir /etc/sudoers.d"
+    stretch: "#includedir /etc/sudoers.d"
     buster: "#includedir /etc/sudoers.d"
   RedHat:
     "8": "#includedir /etc/sudoers.d"
