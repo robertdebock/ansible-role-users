@@ -117,7 +117,7 @@
 - name: user | Deploy authorized keys for {{ user.name }}
   ansible.posix.authorized_key:
     user: "{{ user.name }}"
-    exclusive: "{{ user.exclusive_keys|default(false) }}"
+    exclusive: "{{ user.exclusive_keys | default(false) }}"
     state: present
     key: "{{ item }}"
   loop: "{{ user.authorized_keys }}"
