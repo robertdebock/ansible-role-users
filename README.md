@@ -41,11 +41,6 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
           # You can remove authorized keys.
           unauthorized_keys:
             - "ssh-rsa XYZYX54321"
-        - name: exclusive
-          # This key will be exclusive
-          authorized_keys:
-            - "ssh-rsa XYZYX54321"
-          exclusive_keys: true
         - name: robertdb
           comment: Robert de Bock
           uid: 1024
@@ -235,7 +230,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |container|tags|
 |---------|----|
 |[Alpine](https://hub.docker.com/r/robertdebock/alpine)|all|
-|[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|9|
+|[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|all|
 |[Debian](https://hub.docker.com/r/robertdebock/debian)|all|
 |[Fedora](https://hub.docker.com/r/robertdebock/fedora)|all|
 |[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|all|
