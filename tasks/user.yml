@@ -155,7 +155,8 @@
   ansible.builtin.command:
     cmd: 'awk ''BEGIN { FS = ":" } $1 == "{{ user.name }}" { print $5 }'' /etc/shadow'
   register: users_pw_valid
-  changed_when: false
+  changed_when:
+    - false
   check_mode: false
   when:
     - user.state is defined and user.state != "absent" or
@@ -168,7 +169,8 @@
     - user.password_validity_days is defined
     - users_pw_valid.stdout is defined
     - users_pw_valid.stdout | int !=  user.password_validity_days | int
-  changed_when: true
+  changed_when:
+    - true
 
 - name: user | Place private key file for {{ user.name }}
   ansible.builtin.copy:
